@@ -116,23 +116,38 @@ function tableBlock(block: Extract<Block, { kind: "table" }>): (Table | Paragrap
   return [table, captionParagraph(block.caption)];
 }
 
+let listInstance = 0;
+
 function renderBlock(block: Block): (Paragraph | Table)[] {
   switch (block.kind) {
     case "heading":
       return [headingParagraph(block.text)];
     case "paragraph":
       return [bodyParagraph(block.text)];
+    case "question":
+      return [
+        new Paragraph({
+          children: [text(block.text, true)],
+          alignment: AlignmentType.JUSTIFIED,
+          spacing: { line: LINE, before: 120 },
+          indent: { firstLine: INDENT },
+        }),
+      ];
     case "bullets":
-    case "numbered":
+    case "numbered": {
+      // Окремий instance змушує Word почати нумерацію кожного списку з 1.
+      listInstance += 1;
+      const instance = listInstance;
       return block.items.map(
         (item) =>
           new Paragraph({
             children: [text(item)],
             alignment: AlignmentType.JUSTIFIED,
             spacing: { line: LINE },
-            numbering: { reference: block.kind === "bullets" ? "dashes" : "decimals", level: 0 },
+            numbering: { reference: block.kind === "bullets" ? "dashes" : "decimals", level: 0, instance },
           }),
       );
+    }
     case "code": {
       const lines = block.code.split("\n");
       return [
@@ -251,6 +266,8 @@ function blockHtml(block: Block): string {
       return `<h2>${escapeHtml(block.text)}</h2>`;
     case "paragraph":
       return `<p>${escapeHtml(block.text)}</p>`;
+    case "question":
+      return `<p class="question">${escapeHtml(block.text)}</p>`;
     case "bullets":
       return `<ul>${block.items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
     case "numbered":
@@ -275,6 +292,7 @@ const html = `<!doctype html><meta charset="utf-8">
   body{font-family:'Times New Roman',serif;font-size:14pt;line-height:1.5;text-align:justify;color:#000;margin:0}
   p{margin:0;text-indent:1.25cm}
   h2{font-size:14pt;font-weight:700;text-align:left;margin:12pt 0 6pt}
+  p.question{font-weight:700;margin-top:6pt}
   ul,ol{margin:0 0 0 1.25cm;padding-left:0.6cm}
   li{margin:0}
   pre{font-family:'Courier New',monospace;font-size:10pt;line-height:1.2;background:#f4f4f4;

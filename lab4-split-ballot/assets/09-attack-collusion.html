@@ -1,0 +1,47 @@
+<!doctype html><meta charset="utf-8"><title>node src/main.ts — змова ВК-1 та ВК-2, нечесна ЦВК</title>
+<style>
+  html,body{margin:0;background:#11111b;}
+  .window{width:1104px;box-sizing:border-box;background:#1e1e2e;border-radius:10px;overflow:hidden;
+    font-family:Menlo,'SF Mono',monospace;font-size:15px;line-height:21px;color:#cdd6f4;}
+  .bar{height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#181825;}
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .bar span.t{margin-left:10px;color:#9399b2;font-size:12px;}
+  pre{margin:0;padding:26px;white-space:pre;}
+</style>
+<div class="window">
+  <div class="bar">
+    <div class="dot" style="background:#f38ba8"></div>
+    <div class="dot" style="background:#f9e2af"></div>
+    <div class="dot" style="background:#a6e3a1"></div>
+    <span class="t">node src/main.ts — змова ВК-1 та ВК-2, нечесна ЦВК</span>
+  </div>
+  <pre><span style="font-weight:700"><span style="color:#f9e2af">▌ Сценарій C. Змова ВК-1 та ВК-2: обидві частини виборця №3 замінено на 6 × 6 = 36</span></span>
+<span style="opacity:.62">──────────────────────────────────────────────────────────────────────────────────────────────</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">для нового шифротексту потрібен лише відкритий ключ ЦВК, тому разом ВК отримують коректний ID іншого кандидата</span>
+
+<span style="font-weight:700"><span style="color:#f9e2af">▌ ЦВК об'єднує те, що опублікували нечесні ВК</span></span>
+<span style="opacity:.62">──────────────────────────────────────────────────────────────────────────────────────────────</span>
+<span style="opacity:.62">┌──────────────────────┬───────────────┬───────────────┬─────────────────┬───────────┬───────────────────┐</span>
+<span style="opacity:.62">│</span> <span style="font-weight:700">ID виборця</span>           <span style="opacity:.62">│</span> <span style="font-weight:700">C₁ від ВК-1</span>   <span style="opacity:.62">│</span> <span style="font-weight:700">C₂ від ВК-2</span>   <span style="opacity:.62">│</span> <span style="font-weight:700">C = C₁·C₂ mod n</span> <span style="opacity:.62">│</span> <span style="font-weight:700">C^d mod n</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Перевірка</span>         <span style="opacity:.62">│</span>
+<span style="opacity:.62">├──────────────────────┼───────────────┼───────────────┼─────────────────┼───────────┼───────────────────┤</span>
+<span style="opacity:.62">│</span> 11615467728688988775 <span style="opacity:.62">│</span> 0xae727f…30c1 <span style="opacity:.62">│</span> 0x4339e9…2682 <span style="opacity:.62">│</span> 0x94ec51…3e26   <span style="opacity:.62">│</span> <span style="font-weight:700">36</span>        <span style="opacity:.62">│</span> <span style="color:#a6e3a1">✔ ID кандидата</span>    <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 10561046778810106792 <span style="opacity:.62">│</span> 0xae727f…30c1 <span style="opacity:.62">│</span> 0x19a0f4…11a6 <span style="opacity:.62">│</span> 0xa28d67…5172   <span style="opacity:.62">│</span> <span style="font-weight:700">54</span>        <span style="opacity:.62">│</span> <span style="color:#f38ba8">✘ NOT_A_CANDIDATE</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 15699243191519333620 <span style="opacity:.62">│</span> 0x2a2c79…90e3 <span style="opacity:.62">│</span> 0x2a2c79…90e3 <span style="opacity:.62">│</span> 0x94ec51…3e26   <span style="opacity:.62">│</span> <span style="font-weight:700">36</span>        <span style="opacity:.62">│</span> <span style="color:#a6e3a1">✔ ID кандидата</span>    <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 10099909890242554214 <span style="opacity:.62">│</span> 0x2a2c79…90e3 <span style="opacity:.62">│</span> <span style="color:#f38ba8">—</span>             <span style="opacity:.62">│</span> —               <span style="opacity:.62">│</span> —         <span style="opacity:.62">│</span> <span style="color:#f38ba8">✘ MISSING_PART</span>    <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 14045040593603344180 <span style="opacity:.62">│</span> 0x4339e9…2682 <span style="opacity:.62">│</span> 0x86da57…e9b2 <span style="opacity:.62">│</span> 0x7c66d3…d69d   <span style="opacity:.62">│</span> <span style="font-weight:700">24</span>        <span style="opacity:.62">│</span> <span style="color:#a6e3a1">✔ ID кандидата</span>    <span style="opacity:.62">│</span>
+<span style="opacity:.62">└──────────────────────┴───────────────┴───────────────┴─────────────────┴───────────┴───────────────────┘</span>
+    <span style="color:#f38ba8">✘</span> <span style="color:#f38ba8">ID 10561046778810106792: Після об'єднання і розшифрування отримано число, що не є ID кандидата</span>
+    <span style="color:#f38ba8">✘</span> <span style="color:#f38ba8">ID 10099909890242554214: Для ID опубліковано лише одну частину бюлетеня</span>
+
+<span style="font-weight:700"><span style="color:#f9e2af">▌ Сценарій D. Нечесна ЦВК публікує для виборця №5 бюлетень 36 замість 24</span></span>
+<span style="opacity:.62">──────────────────────────────────────────────────────────────────────────────────────────────</span>
+<span style="opacity:.62">┌──────────────┬─────────────────────────┬────────┐</span>
+<span style="opacity:.62">│</span> <span style="font-weight:700">ID кандидата</span> <span style="opacity:.62">│</span> <span style="font-weight:700">ПІБ</span>                     <span style="opacity:.62">│</span> <span style="font-weight:700">Голоси</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">├──────────────┼─────────────────────────┼────────┤</span>
+<span style="opacity:.62">│</span> 24           <span style="opacity:.62">│</span> Іваненко Іван Іванович  <span style="opacity:.62">│</span> 0      <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 36           <span style="opacity:.62">│</span> Петренко Петро Петрович <span style="opacity:.62">│</span> 3 ███  <span style="opacity:.62">│</span>
+<span style="opacity:.62">└──────────────┴─────────────────────────┴────────┘</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">прийнято бюлетенів: 3, відкинуто ЦВК: 2</span>
+  <span style="font-weight:700"><span style="color:#a6e3a1">ПЕРЕМОЖЕЦЬ: Петренко Петро Петрович (ID 36)</span></span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">чесний результат був би 24: 3, 36: 2 — атаки змінили переможця</span></pre>
+</div>

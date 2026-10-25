@@ -1,0 +1,19 @@
+{
+  "name": "lab2-blind-signatures",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Лабораторна робота №2 (ПАЕГ): протокол Е-голосування зі сліпими підписами RSA",
+  "scripts": {
+    "start": "node src/main.ts",
+    "test": "node --test tests/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "shots": "./tools/shots.sh",
+    "report": "node tools/report.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "docx": "^9.7.1",
+    "typescript": "^5.7.0"
+  }
+}

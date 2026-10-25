@@ -1,0 +1,66 @@
+ПАЕГ, 2026-27               Протоколи і алгоритми електронного голосування (вибіркова).
+
+
+
+
+Дисципліна: Протоколи і алгоритми електронного голосування (ПАЕГ).
+
+Посилання на аудіо/відео записи лекцій ПАЕГ.
+
+
+Лекція
+№                                  Посилання                                      Тема
+           https://drive.google.com/file/d/1ncl-IlemE5sy1Bvc-
+Лк1        HmPQ4d9EXpp6HxN/view?usp=sharing
+                                                                                  Вступ, вимоги до ІП ЕГ
+           https://drive.google.com/file/d/1aOWYImEw0HpR2W93rdL90VMeh
+Лк2        l_Lx2ap/view?usp=sharing
+                                                                                  Ідеальний Протокол ЕГ
+           https://drive.google.com/file/d/1R91yg7kZhVeMtCxJ0cNZRDvC3CtN
+Лк3        Hzci/view?usp=sharing
+                                                                                  Простий Протокол ЕГ
+           https://drive.google.com/file/d/1wnwk9qMsV8F7sdeH94xsWEmZg
+Лк4        M-XvrXu/view?usp=sharing
+                                                                                  Сліпий підпис, принципи
+           https://drive.google.com/file/d/1rz9WHxQ4d_VmEFpnZM_-
+Лк5        oYk7uEgpSUKe/view?usp=sharing
+                                                                                  RSA, створення, конфіденц.
+           https://drive.google.com/file/d/16fAL-
+Лк6        trfiG4vhYRTuwfXoAG1iMFhuJqY/view?usp=sharing
+                                                                                  СП на базі RSA
+           https://drive.google.com/file/d/1ObBz1N1cOTOLnRACsyD_vqUjwHv
+Лк7        eyXQj/view?usp=sharing
+                                                                                  RSA, СП, моделювання
+           https://drive.google.com/file/d/1rcMtBU--
+Лк8        EWr1DAhx8ZyZWDE3Rc3UTjCm/view?usp=sharing
+                                                                                  ЕЦП на базі RSA та El-Gamal
+           https://drive.google.com/file/d/1ovc9NHZg6IFm2ZQMbhFAGTfmDz            Конфіденційна комунікація при ЕГ.
+Лк9        atT4yV/view?usp=sharing
+                                                                                  Алгоритми Діффі-Хеллман та El-
+                                                                                  Gamal
+           https://drive.google.com/file/d/1HvXrqGpLDoYqXD1QEeWhrYreAua           Обернення ключів. Розширений
+Лк10       dqBA-/view?usp=sharing                                                 алгоритм Евкліда.
+           https://drive.google.com/file/d/1pDiR3G-                               Протокол ЕГ без ВК. Протокол ЕГ
+Лк11       Hn3VAQFOr4JYFM6vbVWiaZ1wM/view?usp=sharing                             з перемішуванням бюлетенів.
+           https://drive.google.com/file/d/1zLttLm7myn7Q8rozmJ2RjBIvlvccet
+Лк12       FV/view?usp=sharing
+                                                                                  Не сліпий підпис
+
+           https://drive.google.com/file/d/1KVqWpOEcYeDziDWc4iqunth1qu-           Протокол е-голосування з двома
+Лк13       KnkEB/view?usp=sharing                                                 виборчими комісіями, ANDOS
+           https://drive.google.com/file/d/16FPp8qLU4e9-                          Поліпшений Протокол е-
+Лк14       qoYCWyyonkhB8wEz4sLo/view?usp=sharing                                  голосування з однією комісією
+           https://drive.google.com/file/d/1lZUNabms3FuqJQ9YNck7GnoVwEu           Прозора система е-голосування.
+Лк15       kqzno/view?usp=sharing                                                 Протокол. Ч.1
+           https://drive.google.com/file/d/1ieyrNW2pNv0xZURxrs_g78Sskeb5t         Прозора система е-голосування.
+Лк16       u6A/view?usp=sharing                                                   Протокол.Ч.2
+           https://drive.google.com/file/d/1f4xAvVgbkzfWk59MkWtnbKSN7P            Експериментальна система е-
+Лк17       MlJZU5/view?usp=sharing                                                голосування (В.М.Вишняков) -1
+           https://drive.google.com/file/d/1f4xAvVgbkzfWk59MkWtnbKSN7P            Експериментальна система е-
+Лк18       MlJZU5/view?usp=sharing                                                голосування (В.М.Вишняков) -2
+
+
+
+
+Канд. техн. наук, доцент кафедри ІСТ Полторак В.П.                                                     01.09.2026
+

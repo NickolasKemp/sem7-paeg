@@ -1,0 +1,34 @@
+<!doctype html><meta charset="utf-8"><title>node src/main.ts — мультиплікативна гомоморфність RSA (приклад з методички)</title>
+<style>
+  html,body{margin:0;background:#11111b;}
+  .window{width:923px;box-sizing:border-box;background:#1e1e2e;border-radius:10px;overflow:hidden;
+    font-family:Menlo,'SF Mono',monospace;font-size:15px;line-height:21px;color:#cdd6f4;}
+  .bar{height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#181825;}
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .bar span.t{margin-left:10px;color:#9399b2;font-size:12px;}
+  pre{margin:0;padding:26px;white-space:pre;}
+</style>
+<div class="window">
+  <div class="bar">
+    <div class="dot" style="background:#f38ba8"></div>
+    <div class="dot" style="background:#f9e2af"></div>
+    <div class="dot" style="background:#a6e3a1"></div>
+    <span class="t">node src/main.ts — мультиплікативна гомоморфність RSA (приклад з методички)</span>
+  </div>
+  <pre><span style="color:#89dceb">╔══════════════════════════════════════════════════════════════════════════════════════════════╗</span>
+<span style="color:#89dceb">║</span>               <span style="font-weight:700">ЛАБОРАТОРНА РОБОТА №4 — РОЗПОДІЛ БЮЛЕТЕНЯ МІЖ ВК-1 ТА ВК-2 (RSA)</span>               <span style="color:#89dceb">║</span>
+<span style="color:#89dceb">╚══════════════════════════════════════════════════════════════════════════════════════════════╝</span>
+
+<span style="font-weight:700"><span style="color:#f9e2af">▌ Мультиплікативна гомоморфність RSA: відкритий ключ (7, 33), закритий ключ (3, 33)</span></span>
+<span style="opacity:.62">──────────────────────────────────────────────────────────────────────────────────────────────</span>
+  24^7 mod 33 = 18;   18^3 mod 33 = 24
+<span style="opacity:.62">┌──────────┬────────────────────────────────────┬───────────────────────┬──────────────────┐</span>
+<span style="opacity:.62">│</span> <span style="font-weight:700">Множники</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Шифрування</span>                         <span style="opacity:.62">│</span> <span style="font-weight:700">Множення</span>              <span style="opacity:.62">│</span> <span style="font-weight:700">Дешифрування</span>     <span style="opacity:.62">│</span>
+<span style="opacity:.62">├──────────┼────────────────────────────────────┼───────────────────────┼──────────────────┤</span>
+<span style="opacity:.62">│</span> 1 та 24  <span style="opacity:.62">│</span> 1^7 mod 33 = 1;  24^7 mod 33 = 18  <span style="opacity:.62">│</span> (1 × 18) mod 33 = 18  <span style="opacity:.62">│</span> 18^3 mod 33 = 24 <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 2 та 12  <span style="opacity:.62">│</span> 2^7 mod 33 = 29;  12^7 mod 33 = 12 <span style="opacity:.62">│</span> (29 × 12) mod 33 = 18 <span style="opacity:.62">│</span> 18^3 mod 33 = 24 <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 3 та 8   <span style="opacity:.62">│</span> 3^7 mod 33 = 9;  8^7 mod 33 = 2    <span style="opacity:.62">│</span> (9 × 2) mod 33 = 18   <span style="opacity:.62">│</span> 18^3 mod 33 = 24 <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 4 та 6   <span style="opacity:.62">│</span> 4^7 mod 33 = 16;  6^7 mod 33 = 30  <span style="opacity:.62">│</span> (16 × 30) mod 33 = 18 <span style="opacity:.62">│</span> 18^3 mod 33 = 24 <span style="opacity:.62">│</span>
+<span style="opacity:.62">└──────────┴────────────────────────────────────┴───────────────────────┴──────────────────┘</span>
+    <span style="color:#a6e3a1">✔</span> для кожного поділу добуток шифротекстів дорівнює RSA(24) = 18, а його розшифрування — 24</pre>
+</div>

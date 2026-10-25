@@ -1,0 +1,49 @@
+<!doctype html><meta charset="utf-8"><title>node src/main.ts — атаки однієї ВК: перебір множників, підміна, втрата частини</title>
+<style>
+  html,body{margin:0;background:#11111b;}
+  .window{width:941px;box-sizing:border-box;background:#1e1e2e;border-radius:10px;overflow:hidden;
+    font-family:Menlo,'SF Mono',monospace;font-size:15px;line-height:21px;color:#cdd6f4;}
+  .bar{height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#181825;}
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .bar span.t{margin-left:10px;color:#9399b2;font-size:12px;}
+  pre{margin:0;padding:26px;white-space:pre;}
+</style>
+<div class="window">
+  <div class="bar">
+    <div class="dot" style="background:#f38ba8"></div>
+    <div class="dot" style="background:#f9e2af"></div>
+    <div class="dot" style="background:#a6e3a1"></div>
+    <span class="t">node src/main.ts — атаки однієї ВК: перебір множників, підміна, втрата частини</span>
+  </div>
+  <pre><span style="color:#89dceb">╔══════════════════════════════════════════════════════════════════════════════════════════════╗</span>
+<span style="color:#89dceb">║</span>                       <span style="font-weight:700">АТАКИ НЕЧЕСНИХ КОМІСІЙ ТА ЇХ ВИЯВЛЕННЯ ВИБОРЦЯМИ</span>                       <span style="color:#89dceb">║</span>
+<span style="color:#89dceb">╚══════════════════════════════════════════════════════════════════════════════════════════════╝</span>
+<span style="opacity:.62">┌─────────────────────────────┬──────────────────────┬───────┬─────────────────────┐</span>
+<span style="opacity:.62">│</span> <span style="font-weight:700">Виборець</span>                    <span style="opacity:.62">│</span> <span style="font-weight:700">ID виборця</span>           <span style="opacity:.62">│</span> <span style="font-weight:700">Вибір</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Поділ (ВК-1 × ВК-2)</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">├─────────────────────────────┼──────────────────────┼───────┼─────────────────────┤</span>
+<span style="opacity:.62">│</span> Коваленко Андрій Сергійович <span style="opacity:.62">│</span> 11615467728688988775 <span style="opacity:.62">│</span> 24    <span style="opacity:.62">│</span> 12 × 2              <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> Шевченко Олена Миколаївна   <span style="opacity:.62">│</span> 10561046778810106792 <span style="opacity:.62">│</span> 36    <span style="opacity:.62">│</span> 12 × 3              <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> Бондаренко Богдан Юрійович  <span style="opacity:.62">│</span> 15699243191519333620 <span style="opacity:.62">│</span> 24    <span style="opacity:.62">│</span> 4 × 6               <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> Ткаченко Марія Василівна    <span style="opacity:.62">│</span> 10099909890242554214 <span style="opacity:.62">│</span> 36    <span style="opacity:.62">│</span> 6 × 6               <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> Мельник Остап Ігорович      <span style="opacity:.62">│</span> 14045040593603344180 <span style="opacity:.62">│</span> 24    <span style="opacity:.62">│</span> 2 × 12              <span style="opacity:.62">│</span>
+<span style="opacity:.62">└─────────────────────────────┴──────────────────────┴───────┴─────────────────────┘</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">чесний підсумок: ID 24 — 3, ID 36 — 2</span>
+
+<span style="font-weight:700"><span style="color:#f9e2af">▌ Сценарій A. ВК-1 підбирає свої множники перебором і підміняє 12 → 18 (хоче перетворити 24 на 36)</span></span>
+<span style="opacity:.62">──────────────────────────────────────────────────────────────────────────────────────────────</span>
+<span style="opacity:.62">┌──────────────────────┬───────────────┬────────────────────┬───────────────────────┐</span>
+<span style="opacity:.62">│</span> <span style="font-weight:700">ID виборця</span>           <span style="opacity:.62">│</span> <span style="font-weight:700">RSA(EVP1)</span>     <span style="opacity:.62">│</span> <span style="font-weight:700">Підібраний множник</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Може бути частиною ID</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">├──────────────────────┼───────────────┼────────────────────┼───────────────────────┤</span>
+<span style="opacity:.62">│</span> 11615467728688988775 <span style="opacity:.62">│</span> 0x86da57…e9b2 <span style="opacity:.62">│</span> 12                 <span style="opacity:.62">│</span> 24 або 36             <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 10561046778810106792 <span style="opacity:.62">│</span> 0x86da57…e9b2 <span style="opacity:.62">│</span> 12                 <span style="opacity:.62">│</span> 24 або 36             <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 15699243191519333620 <span style="opacity:.62">│</span> 0x33fc61…3d5d <span style="opacity:.62">│</span> 4                  <span style="opacity:.62">│</span> 24 або 36             <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 10099909890242554214 <span style="opacity:.62">│</span> 0x2a2c79…90e3 <span style="opacity:.62">│</span> 6                  <span style="opacity:.62">│</span> 24 або 36             <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 14045040593603344180 <span style="opacity:.62">│</span> 0x4339e9…2682 <span style="opacity:.62">│</span> 2                  <span style="opacity:.62">│</span> 24 або 36             <span style="opacity:.62">│</span>
+<span style="opacity:.62">└──────────────────────┴───────────────┴────────────────────┴───────────────────────┘</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">RSA без доповнень детермінований: RSA(k) для малих k можна перебрати відкритим ключем ЦВК</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">але кожен множник ділить обидва ID — за однією частиною вибір не визначити</span>
+
+<span style="font-weight:700"><span style="color:#f9e2af">▌ Сценарій B. ВК-2 «губить» частину бюлетеня виборця №4</span></span>
+<span style="opacity:.62">──────────────────────────────────────────────────────────────────────────────────────────────</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">ВК-2 опублікувала 4 з 5 частин</span></pre>
+</div>

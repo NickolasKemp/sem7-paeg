@@ -1,0 +1,41 @@
+<!doctype html><meta charset="utf-8"><title>node src/main.ts — крок 1: ключі виборців, ID кандидатів, ключ ЦВК, передача списку</title>
+<style>
+  html,body{margin:0;background:#11111b;}
+  .window{width:1086px;box-sizing:border-box;background:#1e1e2e;border-radius:10px;overflow:hidden;
+    font-family:Menlo,'SF Mono',monospace;font-size:15px;line-height:21px;color:#cdd6f4;}
+  .bar{height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#181825;}
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .bar span.t{margin-left:10px;color:#9399b2;font-size:12px;}
+  pre{margin:0;padding:26px;white-space:pre;}
+</style>
+<div class="window">
+  <div class="bar">
+    <div class="dot" style="background:#f38ba8"></div>
+    <div class="dot" style="background:#f9e2af"></div>
+    <div class="dot" style="background:#a6e3a1"></div>
+    <span class="t">node src/main.ts — крок 1: ключі виборців, ID кандидатів, ключ ЦВК, передача списку</span>
+  </div>
+  <pre><span style="font-weight:700"><span style="color:#f9e2af">▌ КРОК 1. Ключі виборців, список ЦВК, ID кандидатів, ключ шифрування ЦВК</span></span>
+<span style="opacity:.62">──────────────────────────────────────────────────────────────────────────────────────────────</span>
+  Кожен виборець самостійно згенерував пару ключів RSA для ЕЦП і надіслав відкритий ключ до ЦВК:
+<span style="opacity:.62">┌───┬─────────────────────────────┬──────────────────────────────┬───────────────────┐</span>
+<span style="opacity:.62">│</span> <span style="font-weight:700">№</span> <span style="opacity:.62">│</span> <span style="font-weight:700">ПІБ виборця</span>                 <span style="opacity:.62">│</span> <span style="font-weight:700">Відкритий ключ ЕЦП (e, n)</span>    <span style="opacity:.62">│</span> <span style="font-weight:700">Закритий ключ (d)</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">├───┼─────────────────────────────┼──────────────────────────────┼───────────────────┤</span>
+<span style="opacity:.62">│</span> 1 <span style="opacity:.62">│</span> Коваленко Андрій Сергійович <span style="opacity:.62">│</span> e = 65537, n = 0x6d7143…ebe9 <span style="opacity:.62">│</span> d = 0x308b15…8a81 <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 2 <span style="opacity:.62">│</span> Шевченко Олена Миколаївна   <span style="opacity:.62">│</span> e = 65537, n = 0x771ed7…9561 <span style="opacity:.62">│</span> d = 0x862765…c815 <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 3 <span style="opacity:.62">│</span> Бондаренко Богдан Юрійович  <span style="opacity:.62">│</span> e = 65537, n = 0x8c53db…14e3 <span style="opacity:.62">│</span> d = 0x152465…48b1 <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 4 <span style="opacity:.62">│</span> Ткаченко Марія Василівна    <span style="opacity:.62">│</span> e = 65537, n = 0x4d7eef…c703 <span style="opacity:.62">│</span> d = 0x46604c…fbc1 <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 5 <span style="opacity:.62">│</span> Мельник Остап Ігорович      <span style="opacity:.62">│</span> e = 65537, n = 0x9e60ea…0c75 <span style="opacity:.62">│</span> d = 0x98d0c4…1725 <span style="opacity:.62">│</span>
+<span style="opacity:.62">└───┴─────────────────────────────┴──────────────────────────────┴───────────────────┘</span>
+  ЦВК надала кандидатам ID зі спільними множниками та опублікувала їх:
+<span style="opacity:.62">┌────┬─────────────────────────┬───────────────────────────────┐</span>
+<span style="opacity:.62">│</span> <span style="font-weight:700">ID</span> <span style="opacity:.62">│</span> <span style="font-weight:700">ПІБ кандидата</span>           <span style="opacity:.62">│</span> <span style="font-weight:700">Розклади, що не видають вибір</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">├────┼─────────────────────────┼───────────────────────────────┤</span>
+<span style="opacity:.62">│</span> 24 <span style="opacity:.62">│</span> Іваненко Іван Іванович  <span style="opacity:.62">│</span> 2 × 12, 4 × 6, 6 × 4, 12 × 2  <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 36 <span style="opacity:.62">│</span> Петренко Петро Петрович <span style="opacity:.62">│</span> 3 × 12, 6 × 6, 12 × 3         <span style="opacity:.62">│</span>
+<span style="opacity:.62">└────┴─────────────────────────┴───────────────────────────────┘</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">множники 2, 3, 4, 6, 12 ділять обидва ID — за ними вибір не визначити</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">множники 8, 9, 18 трапляються лише в одному ID, тому виборець їх не використовує</span>
+  ЦВК згенерувала ключі шифрування і опублікувала відкритий ключ: e = 65537, n = 0x6847742a37e5c2…bc302f (511 біт)
+    <span style="color:#a6e3a1">✔</span> ЦВК → ВК-1, ВК-2: список з 5 виборців і їх відкритих ключів ЕЦП передано</pre>
+</div>

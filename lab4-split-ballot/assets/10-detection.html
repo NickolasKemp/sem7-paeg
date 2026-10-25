@@ -1,0 +1,55 @@
+<!doctype html><meta charset="utf-8"><title>node src/main.ts — виявлення атак виборцями та властивості протоколу</title>
+<style>
+  html,body{margin:0;background:#11111b;}
+  .window{width:1014px;box-sizing:border-box;background:#1e1e2e;border-radius:10px;overflow:hidden;
+    font-family:Menlo,'SF Mono',monospace;font-size:15px;line-height:21px;color:#cdd6f4;}
+  .bar{height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#181825;}
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .bar span.t{margin-left:10px;color:#9399b2;font-size:12px;}
+  pre{margin:0;padding:26px;white-space:pre;}
+</style>
+<div class="window">
+  <div class="bar">
+    <div class="dot" style="background:#f38ba8"></div>
+    <div class="dot" style="background:#f9e2af"></div>
+    <div class="dot" style="background:#a6e3a1"></div>
+    <span class="t">node src/main.ts — виявлення атак виборцями та властивості протоколу</span>
+  </div>
+  <pre><span style="font-weight:700"><span style="color:#f9e2af">▌ Виявлення: кожен виборець звіряє публікації ВК-1, ВК-2 і ЦВК зі своєю квитанцією</span></span>
+<span style="opacity:.62">──────────────────────────────────────────────────────────────────────────────────────────────</span>
+<span style="opacity:.62">┌─────────────────────────────┬─────────────────────────────────┬─────────────────────────────────┐</span>
+<span style="opacity:.62">│</span> <span style="font-weight:700">Виборець</span>                    <span style="opacity:.62">│</span> <span style="font-weight:700">ВК-1 опублікувала моє RSA(EVP1)</span> <span style="opacity:.62">│</span> <span style="font-weight:700">ВК-2 опублікувала моє RSA(EVP2)</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">├─────────────────────────────┼─────────────────────────────────┼─────────────────────────────────┤</span>
+<span style="opacity:.62">│</span> Коваленко Андрій Сергійович <span style="opacity:.62">│</span> <span style="color:#f38ba8">✘ НЕ збігається</span>                 <span style="opacity:.62">│</span> <span style="color:#a6e3a1">✔ збігається</span>                    <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> Шевченко Олена Миколаївна   <span style="opacity:.62">│</span> <span style="color:#f38ba8">✘ НЕ збігається</span>                 <span style="opacity:.62">│</span> <span style="color:#a6e3a1">✔ збігається</span>                    <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> Бондаренко Богдан Юрійович  <span style="opacity:.62">│</span> <span style="color:#f38ba8">✘ НЕ збігається</span>                 <span style="opacity:.62">│</span> <span style="color:#a6e3a1">✔ збігається</span>                    <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> Ткаченко Марія Василівна    <span style="opacity:.62">│</span> <span style="color:#a6e3a1">✔ збігається</span>                    <span style="opacity:.62">│</span> <span style="color:#f38ba8">✘ НЕ збігається</span>                 <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> Мельник Остап Ігорович      <span style="opacity:.62">│</span> <span style="color:#a6e3a1">✔ збігається</span>                    <span style="opacity:.62">│</span> <span style="color:#a6e3a1">✔ збігається</span>                    <span style="opacity:.62">│</span>
+<span style="opacity:.62">└─────────────────────────────┴─────────────────────────────────┴─────────────────────────────────┘</span>
+<span style="opacity:.62">┌─────────────────────────────┬──────────────────────┬──────────────┬──────────────────┬─────────────────┐</span>
+<span style="opacity:.62">│</span> <span style="font-weight:700">Виборець</span>                    <span style="opacity:.62">│</span> <span style="font-weight:700">Мій ID</span>               <span style="opacity:.62">│</span> <span style="font-weight:700">Голосував за</span> <span style="opacity:.62">│</span> <span style="font-weight:700">ЦВК опублікувала</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Перевірка</span>       <span style="opacity:.62">│</span>
+<span style="opacity:.62">├─────────────────────────────┼──────────────────────┼──────────────┼──────────────────┼─────────────────┤</span>
+<span style="opacity:.62">│</span> Коваленко Андрій Сергійович <span style="opacity:.62">│</span> 11615467728688988775 <span style="opacity:.62">│</span> 24           <span style="opacity:.62">│</span> 36               <span style="opacity:.62">│</span> <span style="color:#f38ba8">✘ НЕ збігається</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> Шевченко Олена Миколаївна   <span style="opacity:.62">│</span> 10561046778810106792 <span style="opacity:.62">│</span> 36           <span style="opacity:.62">│</span> 54               <span style="opacity:.62">│</span> <span style="color:#f38ba8">✘ НЕ збігається</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> Бондаренко Богдан Юрійович  <span style="opacity:.62">│</span> 15699243191519333620 <span style="opacity:.62">│</span> 24           <span style="opacity:.62">│</span> 36               <span style="opacity:.62">│</span> <span style="color:#f38ba8">✘ НЕ збігається</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> Ткаченко Марія Василівна    <span style="opacity:.62">│</span> 10099909890242554214 <span style="opacity:.62">│</span> 36           <span style="opacity:.62">│</span> —                <span style="opacity:.62">│</span> <span style="color:#f38ba8">✘ НЕ збігається</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> Мельник Остап Ігорович      <span style="opacity:.62">│</span> 14045040593603344180 <span style="opacity:.62">│</span> 24           <span style="opacity:.62">│</span> 36               <span style="opacity:.62">│</span> <span style="color:#f38ba8">✘ НЕ збігається</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">└─────────────────────────────┴──────────────────────┴──────────────┴──────────────────┴─────────────────┘</span>
+  <span style="color:#f9e2af">Виборці №1–4 мають докази підміни частин у публікаціях ВК, виборець №5 — підміни на боці ЦВК.</span>
+  <span style="color:#f9e2af">Бюлетень 54 = 18 × 3 не є ID кандидата — ЦВК бачить сліди втручання ВК-1 навіть без скарг.</span>
+
+<span style="font-weight:700"><span style="color:#f9e2af">▌ Властивості протоколу з розділенням бюлетеня</span></span>
+<span style="opacity:.62">──────────────────────────────────────────────────────────────────────────────────────────────</span>
+<span style="opacity:.62">┌────────────────────────────────┬─────────────┬─────────────────────────────────────────────────────┐</span>
+<span style="opacity:.62">│</span> <span style="font-weight:700">Вимога / загроза</span>               <span style="opacity:.62">│</span> <span style="font-weight:700">Стан</span>        <span style="opacity:.62">│</span> <span style="font-weight:700">Механізм у реалізації</span>                               <span style="opacity:.62">│</span>
+<span style="opacity:.62">├────────────────────────────────┼─────────────┼─────────────────────────────────────────────────────┤</span>
+<span style="opacity:.62">│</span> Голосують лише зареєстровані   <span style="opacity:.62">│</span> <span style="color:#a6e3a1">забезпечено</span> <span style="opacity:.62">│</span> список ЦВК у ВК-1 та ВК-2                           <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> Не більше одного голосу        <span style="opacity:.62">│</span> <span style="color:#a6e3a1">забезпечено</span> <span style="opacity:.62">│</span> відмітка про отримання у кожній ВК                  <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> Неможливо голосувати за іншого <span style="opacity:.62">│</span> <span style="color:#a6e3a1">забезпечено</span> <span style="opacity:.62">│</span> ЕЦП RSA кожного повідомлення                        <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> ВК не знає вибору виборця      <span style="opacity:.62">│</span> <span style="color:#a6e3a1">частково</span>    <span style="opacity:.62">│</span> частина зашифрована, множник спільний для ID        <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> ЦВК не знає ПІБ виборця        <span style="opacity:.62">│</span> <span style="color:#a6e3a1">забезпечено</span> <span style="opacity:.62">│</span> ЦВК бачить лише ID виборця                          <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> Підміна однією ВК              <span style="opacity:.62">│</span> <span style="color:#f9e2af">виявляється</span> <span style="opacity:.62">│</span> невалідний ID + перевірка публікацій виборцем       <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> Змова ВК-1 і ВК-2              <span style="opacity:.62">│</span> <span style="color:#f38ba8">не захищено</span> <span style="opacity:.62">│</span> виявляє лише виборець за квитанцією                 <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> Перебір множників ВК           <span style="opacity:.62">│</span> <span style="color:#f38ba8">можливий</span>    <span style="opacity:.62">│</span> RSA детермінований; рятує лише спільність множників <span style="opacity:.62">│</span>
+<span style="opacity:.62">└────────────────────────────────┴─────────────┴─────────────────────────────────────────────────────┘</span></pre>
+</div>

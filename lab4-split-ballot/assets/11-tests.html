@@ -1,0 +1,48 @@
+<!doctype html><meta charset="utf-8"><title>node --test tests/*.test.ts — модульні тести</title>
+<style>
+  html,body{margin:0;background:#11111b;}
+  .window{width:887px;box-sizing:border-box;background:#1e1e2e;border-radius:10px;overflow:hidden;
+    font-family:Menlo,'SF Mono',monospace;font-size:15px;line-height:21px;color:#cdd6f4;}
+  .bar{height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#181825;}
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .bar span.t{margin-left:10px;color:#9399b2;font-size:12px;}
+  pre{margin:0;padding:26px;white-space:pre;}
+</style>
+<div class="window">
+  <div class="bar">
+    <div class="dot" style="background:#f38ba8"></div>
+    <div class="dot" style="background:#f9e2af"></div>
+    <div class="dot" style="background:#a6e3a1"></div>
+    <span class="t">node --test tests/*.test.ts — модульні тести</span>
+  </div>
+  <pre>▶ Поділ ID кандидата
+  <span style="color:#a6e3a1">✔ ЦВК видає ID 24 і 36, кожен має розклад, що не видає вибір <span style="color:#cdd6f4">(1.439459ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+  <span style="color:#a6e3a1">✔ розклади, що видають вибір, відкидаються <span style="color:#cdd6f4">(0.143875ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+  <span style="color:#a6e3a1">✔ виборець ділить ID на множники, добуток яких дорівнює ID <span style="color:#cdd6f4">(9.458083ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ Поділ ID кандидата <span style="color:#cdd6f4">(11.794541ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+▶ ВК-1 та ВК-2
+  <span style="color:#a6e3a1">✔ приймають коректні повідомлення і публікують частини з однаковим ID виборця <span style="color:#cdd6f4">(6.371209ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+  <span style="color:#a6e3a1">✔ відхиляють незареєстрованого виборця <span style="color:#cdd6f4">(8.612ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+  <span style="color:#a6e3a1">✔ відхиляють повідомлення з підміненою частиною або чужим ЕЦП <span style="color:#cdd6f4">(8.699416ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+  <span style="color:#a6e3a1">✔ відхиляють повторне повідомлення від того самого виборця <span style="color:#cdd6f4">(7.580417ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ ВК-1 та ВК-2 <span style="color:#cdd6f4">(31.473167ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+▶ ЦВК
+  <span style="color:#a6e3a1">✔ об'єднує частини до розшифрування, відновлює ID кандидатів і рахує голоси <span style="color:#cdd6f4">(14.006916ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+  <span style="color:#a6e3a1">✔ відкидає бюлетень, якщо ВК змінила свою частину і вийшов не ID кандидата <span style="color:#cdd6f4">(5.511292ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+  <span style="color:#a6e3a1">✔ відкидає ID, для якого опубліковано лише одну частину <span style="color:#cdd6f4">(6.485625ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ ЦВК <span style="color:#cdd6f4">(26.16125ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+▶ Перевірки виборця
+  <span style="color:#a6e3a1">✔ чесні публікації ВК і ЦВК збігаються з квитанцією <span style="color:#cdd6f4">(7.775042ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+  <span style="color:#a6e3a1">✔ підміна бюлетеня на боці ЦВК виявляється виборцем <span style="color:#cdd6f4">(5.544084ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ Перевірки виборця <span style="color:#cdd6f4">(13.386917ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+▶ RSA
+  <span style="color:#a6e3a1">✔ відтворює таблицю з методичних вказівок для ключів (7, 33) і (3, 33) <span style="color:#cdd6f4">(0.560542ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+  <span style="color:#a6e3a1">✔ RSA(a) · RSA(b) mod n розшифровується в a · b для згенерованого ключа <span style="color:#cdd6f4">(0.191375ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+  <span style="color:#a6e3a1">✔ ЕЦП перевіряється ключем підписувача і не перевіряється після зміни тексту <span style="color:#cdd6f4">(2.767792ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+  <span style="color:#a6e3a1">✔ малий множник підбирається перебором за відкритим ключем <span style="color:#cdd6f4">(0.249541ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ RSA <span style="color:#cdd6f4">(4.496958ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#cdd6f4">ℹ tests 16<span style="color:#cdd6f4"></span></span>
+<span style="color:#cdd6f4">ℹ pass 16<span style="color:#cdd6f4"></span></span>
+<span style="color:#cdd6f4">ℹ fail 0<span style="color:#cdd6f4"></span></span>
+<span style="color:#cdd6f4">ℹ duration_ms 309.233834<span style="color:#cdd6f4"></span></span></pre>
+</div>

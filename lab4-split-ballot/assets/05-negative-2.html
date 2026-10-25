@@ -1,0 +1,53 @@
+<!doctype html><meta charset="utf-8"><title>node src/main.ts — негативні сценарії 3–4: чужий ЕЦП, повторне голосування</title>
+<style>
+  html,body{margin:0;background:#11111b;}
+  .window{width:1068px;box-sizing:border-box;background:#1e1e2e;border-radius:10px;overflow:hidden;
+    font-family:Menlo,'SF Mono',monospace;font-size:15px;line-height:21px;color:#cdd6f4;}
+  .bar{height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#181825;}
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .bar span.t{margin-left:10px;color:#9399b2;font-size:12px;}
+  pre{margin:0;padding:26px;white-space:pre;}
+</style>
+<div class="window">
+  <div class="bar">
+    <div class="dot" style="background:#f38ba8"></div>
+    <div class="dot" style="background:#f9e2af"></div>
+    <div class="dot" style="background:#a6e3a1"></div>
+    <span class="t">node src/main.ts — негативні сценарії 3–4: чужий ЕЦП, повторне голосування</span>
+  </div>
+  <pre>  ▸ Сценарій 3. Повідомлення, підписане чужим закритим ключем
+    <span style="opacity:.62">·</span> <span style="opacity:.62">«Коваленко Андрій Сергійович» підписує своїм ключем, а надсилає до ВК-2 від імені «Мельник Остап Ігорович»</span>
+    <span style="color:#a6e3a1">✔</span> [ВК-2] Наявність у списку виборців: «Мельник Остап Ігорович» є у списку від ЦВК
+    <span style="color:#f38ba8">✘</span> [ВК-2] Перевірка ЕЦП відкритим ключем виборця: H ≠ H_c, ЕЦП недійсний
+    <span style="color:#f38ba8">✘</span> <span style="font-weight:700"><span style="color:#f38ba8">ВК-2: ВІДХИЛЕНО [BAD_SIGNATURE] ЕЦП не пройшов перевірку відкритим ключем виборця</span></span>
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Сценарій 4. Повторне голосування виборця №1
+    <span style="opacity:.62">·</span> <span style="opacity:.62">новий бюлетень коректно підписаний, але від цього виборця обидві ВК вже прийняли частини</span>
+    <span style="color:#a6e3a1">✔</span> [ВК-1] Наявність у списку виборців: «Коваленко Андрій Сергійович» є у списку від ЦВК
+    <span style="color:#a6e3a1">✔</span> [ВК-1] Перевірка ЕЦП відкритим ключем виборця: H = H_c, ЕЦП справжній
+    <span style="color:#f38ba8">✘</span> [ВК-1] Перевірка повторного надсилання: від «Коваленко Андрій Сергійович» частину вже прийнято
+    <span style="color:#f38ba8">✘</span> <span style="font-weight:700"><span style="color:#f38ba8">ВК-1: ВІДХИЛЕНО [ALREADY_VOTED] Від цього виборця вже прийнято частину бюлетеня</span></span>
+    <span style="color:#a6e3a1">✔</span> [ВК-2] Наявність у списку виборців: «Коваленко Андрій Сергійович» є у списку від ЦВК
+    <span style="color:#a6e3a1">✔</span> [ВК-2] Перевірка ЕЦП відкритим ключем виборця: H = H_c, ЕЦП справжній
+    <span style="color:#f38ba8">✘</span> [ВК-2] Перевірка повторного надсилання: від «Коваленко Андрій Сергійович» частину вже прийнято
+    <span style="color:#f38ba8">✘</span> <span style="font-weight:700"><span style="color:#f38ba8">ВК-2: ВІДХИЛЕНО [ALREADY_VOTED] Від цього виборця вже прийнято частину бюлетеня</span></span>
+
+<span style="font-weight:700"><span style="color:#f9e2af">▌ ПРОДОВЖЕННЯ ГОЛОСУВАННЯ</span></span>
+<span style="opacity:.62">──────────────────────────────────────────────────────────────────────────────────────────────</span>
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Виборець №5 голосує за ID 24
+    <span style="opacity:.62">·</span> <span style="opacity:.62">ID виборця (згенерований самостійно, 64 біти): 11500373512480851232</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">поділ ID кандидата на множники: 24 = 6 × 4</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">бюлетень 1: RSA(6) = 6^65537 mod n → 0x2e0ffe9451…95ff (510 біт)</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">бюлетень 2: RSA(4) = 4^65537 mod n → 0x4ba239a901…8a2a (511 біт)</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">ЕЦП(RSA(EVP1), ID) → 0x816ac959ec…029a (512 біт)  ⇒ ВК-1</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">ЕЦП(RSA(EVP2), ID) → 0x2b5391b097…3c1d (510 біт)  ⇒ ВК-2</span>
+    <span style="color:#a6e3a1">✔</span> [ВК-1] Наявність у списку виборців: «Мельник Остап Ігорович» є у списку від ЦВК
+    <span style="color:#a6e3a1">✔</span> [ВК-1] Перевірка ЕЦП відкритим ключем виборця: H = H_c, ЕЦП справжній
+    <span style="color:#a6e3a1">✔</span> [ВК-1] Перевірка повторного надсилання: відмітку про отримання поставлено
+    <span style="color:#a6e3a1">✔</span> <span style="color:#a6e3a1">ВК-1: частину бюлетеня прийнято та збережено разом з ID</span>
+    <span style="color:#a6e3a1">✔</span> [ВК-2] Наявність у списку виборців: «Мельник Остап Ігорович» є у списку від ЦВК
+    <span style="color:#a6e3a1">✔</span> [ВК-2] Перевірка ЕЦП відкритим ключем виборця: H = H_c, ЕЦП справжній
+    <span style="color:#a6e3a1">✔</span> [ВК-2] Перевірка повторного надсилання: відмітку про отримання поставлено
+    <span style="color:#a6e3a1">✔</span> <span style="color:#a6e3a1">ВК-2: частину бюлетеня прийнято та збережено разом з ID</span></pre>
+</div>

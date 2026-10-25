@@ -1,0 +1,43 @@
+<!doctype html><meta charset="utf-8"><title>node src/main.ts — негативні сценарії 1–2: незареєстрований виборець, підміна частини</title>
+<style>
+  html,body{margin:0;background:#11111b;}
+  .window{width:932px;box-sizing:border-box;background:#1e1e2e;border-radius:10px;overflow:hidden;
+    font-family:Menlo,'SF Mono',monospace;font-size:15px;line-height:21px;color:#cdd6f4;}
+  .bar{height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#181825;}
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .bar span.t{margin-left:10px;color:#9399b2;font-size:12px;}
+  pre{margin:0;padding:26px;white-space:pre;}
+</style>
+<div class="window">
+  <div class="bar">
+    <div class="dot" style="background:#f38ba8"></div>
+    <div class="dot" style="background:#f9e2af"></div>
+    <div class="dot" style="background:#a6e3a1"></div>
+    <span class="t">node src/main.ts — негативні сценарії 1–2: незареєстрований виборець, підміна частини</span>
+  </div>
+  <pre><span style="font-weight:700"><span style="color:#f9e2af">▌ НЕГАТИВНІ СЦЕНАРІЇ ПЕРЕВІРОК ВК</span></span>
+<span style="opacity:.62">──────────────────────────────────────────────────────────────────────────────────────────────</span>
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Сценарій 1. Повідомлення від незареєстрованого виборця
+    <span style="opacity:.62">·</span> <span style="opacity:.62">ключі згенеровані, але відкритий ключ не надсилався до ЦВК — її немає у списку</span>
+    <span style="color:#f38ba8">✘</span> [ВК-1] Наявність у списку виборців: «Стороння Мальвіна Олегівна» відсутній у списку
+    <span style="color:#f38ba8">✘</span> <span style="font-weight:700"><span style="color:#f38ba8">ВК-1: ВІДХИЛЕНО [NOT_IN_LIST] Відправника немає у списку виборців, отриманому від ЦВК</span></span>
+    <span style="color:#f38ba8">✘</span> [ВК-2] Наявність у списку виборців: «Стороння Мальвіна Олегівна» відсутній у списку
+    <span style="color:#f38ba8">✘</span> <span style="font-weight:700"><span style="color:#f38ba8">ВК-2: ВІДХИЛЕНО [NOT_IN_LIST] Відправника немає у списку виборців, отриманому від ЦВК</span></span>
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Сценарій 2. Повідомлення з неправильним ЕЦП: підміна RSA(EVP1) по дорозі до ВК-1
+    <span style="opacity:.62">·</span> <span style="opacity:.62">оригінал: RSA(3) = 0xf5f1fa…ec7f, підміна: RSA(5) = 0x6bdf42…2871</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">відкритий ключ ЦВК доступний усім, але ЕЦП виборця без його закритого ключа не перерахувати</span>
+    <span style="color:#a6e3a1">✔</span> [ВК-1] Наявність у списку виборців: «Ткаченко Марія Василівна» є у списку від ЦВК
+    <span style="color:#f38ba8">✘</span> [ВК-1] Перевірка ЕЦП відкритим ключем виборця: H ≠ H_c, ЕЦП недійсний
+    <span style="color:#f38ba8">✘</span> <span style="font-weight:700"><span style="color:#f38ba8">ВК-1: ВІДХИЛЕНО [BAD_SIGNATURE] ЕЦП не пройшов перевірку відкритим ключем виборця</span></span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">виборець №4 надсилає оригінальні повідомлення до обох ВК:</span>
+    <span style="color:#a6e3a1">✔</span> [ВК-1] Наявність у списку виборців: «Ткаченко Марія Василівна» є у списку від ЦВК
+    <span style="color:#a6e3a1">✔</span> [ВК-1] Перевірка ЕЦП відкритим ключем виборця: H = H_c, ЕЦП справжній
+    <span style="color:#a6e3a1">✔</span> [ВК-1] Перевірка повторного надсилання: відмітку про отримання поставлено
+    <span style="color:#a6e3a1">✔</span> <span style="color:#a6e3a1">ВК-1: частину бюлетеня прийнято та збережено разом з ID</span>
+    <span style="color:#a6e3a1">✔</span> [ВК-2] Наявність у списку виборців: «Ткаченко Марія Василівна» є у списку від ЦВК
+    <span style="color:#a6e3a1">✔</span> [ВК-2] Перевірка ЕЦП відкритим ключем виборця: H = H_c, ЕЦП справжній
+    <span style="color:#a6e3a1">✔</span> [ВК-2] Перевірка повторного надсилання: відмітку про отримання поставлено
+    <span style="color:#a6e3a1">✔</span> <span style="color:#a6e3a1">ВК-2: частину бюлетеня прийнято та збережено разом з ID</span></pre>
+</div>

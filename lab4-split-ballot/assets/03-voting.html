@@ -1,0 +1,52 @@
+<!doctype html><meta charset="utf-8"><title>node src/main.ts — кроки 2–4: поділ ID, шифрування частин, ЕЦП, перевірки ВК</title>
+<style>
+  html,body{margin:0;background:#11111b;}
+  .window{width:905px;box-sizing:border-box;background:#1e1e2e;border-radius:10px;overflow:hidden;
+    font-family:Menlo,'SF Mono',monospace;font-size:15px;line-height:21px;color:#cdd6f4;}
+  .bar{height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#181825;}
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .bar span.t{margin-left:10px;color:#9399b2;font-size:12px;}
+  pre{margin:0;padding:26px;white-space:pre;}
+</style>
+<div class="window">
+  <div class="bar">
+    <div class="dot" style="background:#f38ba8"></div>
+    <div class="dot" style="background:#f9e2af"></div>
+    <div class="dot" style="background:#a6e3a1"></div>
+    <span class="t">node src/main.ts — кроки 2–4: поділ ID, шифрування частин, ЕЦП, перевірки ВК</span>
+  </div>
+  <pre><span style="font-weight:700"><span style="color:#f9e2af">▌ КРОКИ 2–4. Поділ ID, шифрування частин, ЕЦП, перевірки ВК-1 та ВК-2</span></span>
+<span style="opacity:.62">──────────────────────────────────────────────────────────────────────────────────────────────</span>
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Виборець №1 голосує за ID 24
+    <span style="opacity:.62">·</span> <span style="opacity:.62">ID виборця (згенерований самостійно, 64 біти): 10471222238670660670</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">поділ ID кандидата на множники: 24 = 12 × 2</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">бюлетень 1: RSA(12) = 12^65537 mod n → 0x625c211950…ff04 (511 біт)</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">бюлетень 2: RSA(2) = 2^65537 mod n → 0x266dde03e2…d3c9 (506 біт)</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">ЕЦП(RSA(EVP1), ID) → 0x4a5a5c19f9…4f4e (511 біт)  ⇒ ВК-1</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">ЕЦП(RSA(EVP2), ID) → 0x5d1fe59416…4bfa (511 біт)  ⇒ ВК-2</span>
+    <span style="color:#a6e3a1">✔</span> [ВК-1] Наявність у списку виборців: «Коваленко Андрій Сергійович» є у списку від ЦВК
+    <span style="color:#a6e3a1">✔</span> [ВК-1] Перевірка ЕЦП відкритим ключем виборця: H = H_c, ЕЦП справжній
+    <span style="color:#a6e3a1">✔</span> [ВК-1] Перевірка повторного надсилання: відмітку про отримання поставлено
+    <span style="color:#a6e3a1">✔</span> <span style="color:#a6e3a1">ВК-1: частину бюлетеня прийнято та збережено разом з ID</span>
+    <span style="color:#a6e3a1">✔</span> [ВК-2] Наявність у списку виборців: «Коваленко Андрій Сергійович» є у списку від ЦВК
+    <span style="color:#a6e3a1">✔</span> [ВК-2] Перевірка ЕЦП відкритим ключем виборця: H = H_c, ЕЦП справжній
+    <span style="color:#a6e3a1">✔</span> [ВК-2] Перевірка повторного надсилання: відмітку про отримання поставлено
+    <span style="color:#a6e3a1">✔</span> <span style="color:#a6e3a1">ВК-2: частину бюлетеня прийнято та збережено разом з ID</span>
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Виборець №2 голосує за ID 36
+    <span style="opacity:.62">·</span> <span style="opacity:.62">ID виборця (згенерований самостійно, 64 біти): 17704262184777346850</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">поділ ID кандидата на множники: 36 = 6 × 6</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">бюлетень 1: RSA(6) = 6^65537 mod n → 0x2e0ffe9451…95ff (510 біт)</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">бюлетень 2: RSA(6) = 6^65537 mod n → 0x2e0ffe9451…95ff (510 біт)</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">ЕЦП(RSA(EVP1), ID) → 0x1aed5adf57…c530 (509 біт)  ⇒ ВК-1</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">ЕЦП(RSA(EVP2), ID) → 0x1aed5adf57…c530 (509 біт)  ⇒ ВК-2</span>
+    <span style="color:#a6e3a1">✔</span> [ВК-1] Наявність у списку виборців: «Шевченко Олена Миколаївна» є у списку від ЦВК
+    <span style="color:#a6e3a1">✔</span> [ВК-1] Перевірка ЕЦП відкритим ключем виборця: H = H_c, ЕЦП справжній
+    <span style="color:#a6e3a1">✔</span> [ВК-1] Перевірка повторного надсилання: відмітку про отримання поставлено
+    <span style="color:#a6e3a1">✔</span> <span style="color:#a6e3a1">ВК-1: частину бюлетеня прийнято та збережено разом з ID</span>
+    <span style="color:#a6e3a1">✔</span> [ВК-2] Наявність у списку виборців: «Шевченко Олена Миколаївна» є у списку від ЦВК
+    <span style="color:#a6e3a1">✔</span> [ВК-2] Перевірка ЕЦП відкритим ключем виборця: H = H_c, ЕЦП справжній
+    <span style="color:#a6e3a1">✔</span> [ВК-2] Перевірка повторного надсилання: відмітку про отримання поставлено
+    <span style="color:#a6e3a1">✔</span> <span style="color:#a6e3a1">ВК-2: частину бюлетеня прийнято та збережено разом з ID</span></pre>
+</div>

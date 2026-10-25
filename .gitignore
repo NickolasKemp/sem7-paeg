@@ -1,0 +1,6 @@
+node_modules/
+video/build/
+assets/*.html
+assets/*.size
+report/report.html
+.DS_Store

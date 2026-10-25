@@ -24,9 +24,9 @@ import { REPORT, TITLE_PAGE, type Block } from "./report-content.ts";
 
 /**
  * Формує звіт до лабораторної роботи у двох форматах з одного джерела:
- *   report/Звіт_ЛР2_ПАЕГ.docx — основний документ (Times New Roman 14, інтервал 1.5,
+ *   report/Звіт_ЛР2_ПАЕГ_Туболев_Шамков.docx — основний документ (Times New Roman 14, інтервал 1.5,
  *                               абзацний відступ 1.25 см, вирівнювання по ширині);
- *   report/Звіт_ЛР2_ПАЕГ.pdf  — той самий текст для швидкого перегляду (headless Chrome).
+ *   report/Звіт_ЛР2_ПАЕГ_Туболев_Шамков.pdf  — той самий текст для швидкого перегляду (headless Chrome).
  */
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -252,7 +252,9 @@ const document = new Document({
   ],
 });
 
-const docxPath = join(root, "report", "Звіт_ЛР2_ПАЕГ.docx");
+const REPORT_NAME = "Звіт_ЛР2_ПАЕГ_Туболев_Шамков";
+
+const docxPath = join(root, "report", `${REPORT_NAME}.docx`);
 writeFileSync(docxPath, await Packer.toBuffer(document));
 console.log(`Створено ${docxPath}`);
 
@@ -326,7 +328,7 @@ const html = `<!doctype html><meta charset="utf-8">
 ${REPORT.map(blockHtml).join("\n")}`;
 
 const htmlPath = join(root, "report", "report.html");
-const pdfPath = join(root, "report", "Звіт_ЛР2_ПАЕГ.pdf");
+const pdfPath = join(root, "report", `${REPORT_NAME}.pdf`);
 writeFileSync(htmlPath, html);
 
 execFileSync(CHROME, [

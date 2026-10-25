@@ -16,7 +16,7 @@ npm run typecheck
 
 ```bash
 npm run shots    # скріншоти виконання → assets/*.png
-npm run report   # звіт → report/Звіт_ЛР2_ПАЕГ.docx і .pdf
+npm run report   # звіт → report/Звіт_ЛР2_ПАЕГ_Туболев_Шамков.docx і .pdf
 ```
 
 Потрібен Node.js ≥ 22.6 (TypeScript виконується напряму, без збірки).

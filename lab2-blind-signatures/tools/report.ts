@@ -13,6 +13,7 @@ import {
   Paragraph,
   ShadingType,
   Table,
+  TableBorders,
   TableCell,
   TableRow,
   TextRun,
@@ -122,6 +123,15 @@ function renderBlock(block: Block): (Paragraph | Table)[] {
       return [headingParagraph(block.text)];
     case "paragraph":
       return [bodyParagraph(block.text)];
+    case "question":
+      return [
+        new Paragraph({
+          children: [text(block.text, true)],
+          alignment: AlignmentType.JUSTIFIED,
+          spacing: { line: LINE, before: 120 },
+          indent: { firstLine: INDENT },
+        }),
+      ];
     case "bullets":
     case "numbered":
       return block.items.map(
@@ -158,28 +168,37 @@ function renderBlock(block: Block): (Paragraph | Table)[] {
   }
 }
 
-function titlePage(): Paragraph[] {
-  const centered = (value: string, spacing: { before?: number; after?: number } = {}) =>
+const SIGNATURE_COLUMNS = [Math.round(5.1 * CM), Math.round(8.6 * CM)];
+
+function titlePage(): (Paragraph | Table)[] {
+  const centered = (value: string, before = 0) =>
     new Paragraph({
       children: [text(value)],
       alignment: AlignmentType.CENTER,
-      spacing: { line: LINE, ...spacing },
-    });
-
-  const right = (value: string, before = 0) =>
-    new Paragraph({
-      children: [text(value)],
-      alignment: AlignmentType.RIGHT,
       spacing: { line: LINE, before },
     });
 
+  const signatureCell = (value: string, width: number) =>
+    new TableCell({
+      width: { size: width, type: WidthType.DXA },
+      children: [new Paragraph({ children: [text(value)], alignment: AlignmentType.LEFT, spacing: { line: LINE } })],
+    });
+
+  const signatures = new Table({
+    borders: TableBorders.NONE,
+    indent: { size: Math.round(2.8 * CM), type: WidthType.DXA },
+    columnWidths: SIGNATURE_COLUMNS,
+    rows: TITLE_PAGE.signatures.map(
+      (row) => new TableRow({ children: row.map((value, index) => signatureCell(value, SIGNATURE_COLUMNS[index] ?? 0)) }),
+    ),
+  });
+
   return [
-    ...TITLE_PAGE.institution.map((line) => centered(line, { after: 240 })),
-    centered(TITLE_PAGE.work, { before: 1200 }),
-    centered(TITLE_PAGE.discipline, { before: 1200 }),
-    right(TITLE_PAGE.author, 2400),
-    right(TITLE_PAGE.reviewer),
-    centered(TITLE_PAGE.year, { before: 6000 }),
+    ...TITLE_PAGE.institution.map((line) => centered(line)),
+    ...TITLE_PAGE.work.map((line, index) => centered(line, index === 0 ? Math.round(4.8 * CM) : 0)),
+    new Paragraph({ children: [], spacing: { before: Math.round(2.6 * CM) } }),
+    signatures,
+    centered(TITLE_PAGE.year, Math.round(3.6 * CM)),
     new Paragraph({ children: [new PageBreak()] }),
   ];
 }
@@ -248,6 +267,8 @@ function blockHtml(block: Block): string {
       return `<h2>${escapeHtml(block.text)}</h2>`;
     case "paragraph":
       return `<p>${escapeHtml(block.text)}</p>`;
+    case "question":
+      return `<p class="question">${escapeHtml(block.text)}</p>`;
     case "bullets":
       return `<ul>${block.items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
     case "numbered":
@@ -272,6 +293,7 @@ const html = `<!doctype html><meta charset="utf-8">
   body{font-family:'Times New Roman',serif;font-size:14pt;line-height:1.5;text-align:justify;color:#000;margin:0}
   p{margin:0;text-indent:1.25cm}
   h2{font-size:14pt;font-weight:700;text-align:left;margin:12pt 0 6pt}
+  p.question{font-weight:700;margin-top:6pt}
   ul,ol{margin:0 0 0 1.25cm;padding-left:0.6cm}
   ul{list-style-type:"– "}
   li{margin:0}
@@ -286,21 +308,19 @@ const html = `<!doctype html><meta charset="utf-8">
   th{background:#efefef}
   .page-break{page-break-after:always}
   .title-page{text-align:center;page-break-after:always}
-  .title-page p{text-indent:0;margin:0 0 12pt}
-  .title-page .work{margin-top:2cm}
-  .title-page .discipline{margin-top:2cm}
-  .title-page .who{text-align:right;margin-top:4cm}
-  .title-page .who p{margin:0}
-  .title-page .year{margin-top:9cm}
+  .title-page p{text-indent:0;margin:0}
+  .title-page .work{margin-top:4.8cm}
+  .title-page table.signatures{width:auto;margin:2.6cm 0 0 2.8cm;page-break-inside:auto}
+  .title-page table.signatures td{border:none;padding:0;font-size:14pt;line-height:1.5;text-align:left}
+  .title-page table.signatures td:first-child{width:5.1cm}
+  .title-page .year{margin-top:3.6cm}
 </style>
 <div class="title-page">
   ${TITLE_PAGE.institution.map((line) => `<p>${escapeHtml(line)}</p>`).join("\n  ")}
-  <p class="work">${escapeHtml(TITLE_PAGE.work)}</p>
-  <p class="discipline">${escapeHtml(TITLE_PAGE.discipline)}</p>
-  <div class="who">
-    <p>${escapeHtml(TITLE_PAGE.author)}</p>
-    <p>${escapeHtml(TITLE_PAGE.reviewer)}</p>
-  </div>
+  <div class="work">${TITLE_PAGE.work.map((line) => `<p>${escapeHtml(line)}</p>`).join("")}</div>
+  <table class="signatures">${TITLE_PAGE.signatures
+    .map((row) => `<tr>${row.map((value) => `<td>${escapeHtml(value)}</td>`).join("")}</tr>`)
+    .join("")}</table>
   <p class="year">${escapeHtml(TITLE_PAGE.year)}</p>
 </div>
 ${REPORT.map(blockHtml).join("\n")}`;

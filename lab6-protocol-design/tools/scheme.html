@@ -1,0 +1,169 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Структурно-функціональна схема протоколу</title>
+<style>
+  html, body { margin: 0; background: #fff; }
+  svg { display: block; font-family: "Helvetica Neue", Arial, sans-serif; }
+  .box { stroke-width: 2; rx: 10; }
+  .title { font-size: 19px; font-weight: 700; fill: #111; }
+  .text { font-size: 14px; fill: #222; }
+  .small { font-size: 13px; fill: #333; }
+  .label { font-size: 13.5px; fill: #111; }
+  .step { font-size: 13px; font-weight: 700; fill: #fff; }
+  .arrow { fill: none; stroke-width: 2; }
+  .dash { stroke-dasharray: 7 5; }
+</style>
+<svg width="1560" height="1010" viewBox="0 0 1560 1010" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="a-black" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker>
+    <marker id="a-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/></marker>
+    <marker id="a-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1d4ed8"/></marker>
+    <marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#15803d"/></marker>
+    <marker id="a-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7e22ce"/></marker>
+    <marker id="a-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/></marker>
+  </defs>
+
+  <!-- Бюро реєстрації -->
+  <rect class="box" x="30" y="20" width="520" height="170" fill="#fff7ed" stroke="#c2410c"/>
+  <text class="title" x="50" y="50">БР — бюро реєстрації (частина ЦВК)</text>
+  <text class="text" x="50" y="78">перевіряє: реєстр громадян, ПІБ, вік ≥ 18, дільницю, одноразовість</text>
+  <text class="text" x="50" y="102">ключі сліпого ЕЦП RSA: окремо для дільниці №1 і №2</text>
+  <text class="text" x="50" y="126">зберігає: ПІБ, дільниця, H' (замаскований хеш)</text>
+  <text class="text" x="50" y="150">не бачить: мандат T, ID виборця, бюлетень</text>
+  <text class="small" x="50" y="174">публікує: відкриті ключі, списки зареєстрованих по дільницях</text>
+
+  <!-- Виборець -->
+  <rect class="box" x="30" y="300" width="330" height="440" fill="#f8fafc" stroke="#334155"/>
+  <text class="title" x="50" y="332">Виборець (дільниця d)</text>
+  <text class="text" x="50" y="364">генерує псевдонімну пару ключів ЕЦП</text>
+  <text class="text" x="50" y="388">мандат T = (ID, k_pub), ID — 64 біти</text>
+  <text class="text" x="50" y="412">H = hash(T);  H' = H · rᵉ mod n_БР</text>
+  <text class="text" x="50" y="436">S = S' · r⁻¹ mod n_БР — ЕЦП БР на T</text>
+  <text class="text" x="50" y="472">бюлетень m = ID кандидата</text>
+  <text class="text" x="50" y="496">m₁ ∈ Z*ₙ випадкове, m₂ = m · m₁⁻¹ mod n</text>
+  <text class="text" x="50" y="520">Cᵢ = mᵢᵉ mod n (ключ ЦВК)</text>
+  <text class="text" x="50" y="544">ЕЦП(ID, гілка i, Cᵢ) ключем k_priv</text>
+  <text class="text" x="50" y="580">зберігає квитанцію: m, обидві</text>
+  <text class="text" x="50" y="604">підписані частини (доказ для скарги)</text>
+  <text class="text" x="50" y="640">перевіряє публікації ДВК, СВК, ЦВК</text>
+  <text class="small" x="50" y="676">надсилає частини анонімно — без ПІБ</text>
+  <text class="small" x="50" y="700">r, k_priv, m відомі лише йому</text>
+
+  <!-- ДВК -->
+  <g>
+    <rect class="box" x="560" y="235" width="300" height="115" fill="#eff6ff" stroke="#1d4ed8"/>
+    <text class="title" x="578" y="263">ДВК-1.1 · гілка 1 · дільн. №1</text>
+    <rect class="box" x="560" y="375" width="300" height="115" fill="#eff6ff" stroke="#1d4ed8"/>
+    <text class="title" x="578" y="403">ДВК-1.2 · гілка 1 · дільн. №2</text>
+    <rect class="box" x="560" y="565" width="300" height="115" fill="#f0fdf4" stroke="#15803d"/>
+    <text class="title" x="578" y="593">ДВК-2.1 · гілка 2 · дільн. №1</text>
+    <rect class="box" x="560" y="705" width="300" height="115" fill="#f0fdf4" stroke="#15803d"/>
+    <text class="title" x="578" y="733">ДВК-2.2 · гілка 2 · дільн. №2</text>
+  </g>
+  <g class="small">
+    <text x="578" y="287">перевіряє: адреса, ЕЦП БР на T,</text>
+    <text x="578" y="307">ЕЦП виборця, одноразовість ID</text>
+    <text x="578" y="331">бачить лише C₁ — випадкове число</text>
+    <text x="578" y="427">перевіряє: адреса, ЕЦП БР на T,</text>
+    <text x="578" y="447">ЕЦП виборця, одноразовість ID</text>
+    <text x="578" y="471">бачить лише C₁ — випадкове число</text>
+    <text x="578" y="617">перевіряє: адреса, ЕЦП БР на T,</text>
+    <text x="578" y="637">ЕЦП виборця, одноразовість ID</text>
+    <text x="578" y="661">бачить лише C₂ — випадкове число</text>
+    <text x="578" y="757">перевіряє: адреса, ЕЦП БР на T,</text>
+    <text x="578" y="777">ЕЦП виборця, одноразовість ID</text>
+    <text x="578" y="801">бачить лише C₂ — випадкове число</text>
+  </g>
+
+  <!-- СВК -->
+  <rect class="box" x="950" y="290" width="270" height="150" fill="#dbeafe" stroke="#1d4ed8"/>
+  <text class="title" x="968" y="320">СВК-1 (гілка 1)</text>
+  <text class="small" x="968" y="346">перевіряє ЕЦП пакетів ДВК-1.x</text>
+  <text class="small" x="968" y="368">і кожну частину повторно;</text>
+  <text class="small" x="968" y="390">відкидає дублікати;</text>
+  <text class="small" x="968" y="412">розглядає скарги виборців</text>
+
+  <rect class="box" x="950" y="620" width="270" height="150" fill="#dcfce7" stroke="#15803d"/>
+  <text class="title" x="968" y="650">СВК-2 (гілка 2)</text>
+  <text class="small" x="968" y="676">перевіряє ЕЦП пакетів ДВК-2.x</text>
+  <text class="small" x="968" y="698">і кожну частину повторно;</text>
+  <text class="small" x="968" y="720">відкидає дублікати;</text>
+  <text class="small" x="968" y="742">розглядає скарги виборців</text>
+
+  <!-- ЦВК -->
+  <rect class="box" x="1300" y="380" width="235" height="300" fill="#faf5ff" stroke="#7e22ce"/>
+  <text class="title" x="1318" y="410">ЦВК</text>
+  <text class="small" x="1318" y="438">ключ RSA (e, n); d — секрет</text>
+  <text class="small" x="1318" y="460">кандидати 101, 102, 103</text>
+  <text class="small" x="1318" y="490">перевіряє ЕЦП СВК і</text>
+  <text class="small" x="1318" y="510">кожну частину повторно</text>
+  <text class="small" x="1318" y="540">зіставляє частини за ID</text>
+  <text class="small" x="1318" y="562">C = C₁ · C₂ mod n</text>
+  <text class="small" x="1318" y="584">m = Cᵈ mod n, m ∈ кандидати?</text>
+  <text class="small" x="1318" y="614">підрахунок: усього</text>
+  <text class="small" x="1318" y="634">і по дільницях</text>
+  <text class="small" x="1318" y="660">не знає ПІБ виборців</text>
+
+  <!-- Публічна дошка -->
+  <rect class="box" x="30" y="870" width="1505" height="120" fill="#f3f4f6" stroke="#6b7280"/>
+  <text class="title" x="50" y="900">Публічна дошка оголошень і аудитор (спостерігач)</text>
+  <text class="text" x="50" y="928">опубліковано: ключі БР, ДВК, СВК, ЦВК · кандидати · списки зареєстрованих · підписані пакети ДВК і СВК · результати (ID, C₁, C₂, C, m)</text>
+  <text class="text" x="50" y="954">аудит: ланцюжок ДВК → СВК → ЦВК, mᵉ mod n = C₁ · C₂ mod n, перерахунок підсумків, кількість бюлетенів ≤ зареєстрованих на дільниці</text>
+  <text class="text" x="50" y="978">виборець: знаходить свій ID і свої частини в кожній публікації; розбіжність — підстава для скарги з власною підписаною частиною</text>
+
+  <!-- Потоки: реєстрація -->
+  <path class="arrow" d="M100,300 L100,190" stroke="#c2410c" marker-end="url(#a-orange)"/>
+  <path class="arrow" d="M280,190 L280,300" stroke="#c2410c" marker-end="url(#a-orange)"/>
+  <circle cx="100" cy="245" r="12" fill="#c2410c"/><text class="step" x="95" y="250">1</text>
+  <circle cx="280" cy="245" r="12" fill="#c2410c"/><text class="step" x="275" y="250">2</text>
+  <text class="label" x="118" y="222">ПІБ, паспорт, d, H'</text>
+  <text class="label" x="138" y="285">S' = (H')ᵈ mod n_БР</text>
+
+  <!-- Потоки: виборець → ДВК -->
+  <path class="arrow" d="M360,420 C450,420 470,292 560,292" stroke="#1d4ed8" marker-end="url(#a-blue)"/>
+  <path class="arrow" d="M360,450 C460,450 470,432 560,432" stroke="#1d4ed8" marker-end="url(#a-blue)"/>
+  <path class="arrow" d="M360,600 C460,600 470,622 560,622" stroke="#15803d" marker-end="url(#a-green)"/>
+  <path class="arrow" d="M360,630 C450,630 470,762 560,762" stroke="#15803d" marker-end="url(#a-green)"/>
+  <circle cx="420" cy="400" r="12" fill="#1d4ed8"/><text class="step" x="415" y="405">3</text>
+  <circle cx="420" cy="650" r="12" fill="#15803d"/><text class="step" x="415" y="655">3</text>
+  <text class="label" x="372" y="497">→ ДВК-1.d:</text>
+  <text class="label" x="372" y="515">(T, S, 1, C₁, ЕЦП)</text>
+  <text class="label" x="372" y="548">→ ДВК-2.d:</text>
+  <text class="label" x="372" y="566">(T, S, 2, C₂, ЕЦП)</text>
+
+  <!-- ДВК → СВК -->
+  <path class="arrow" d="M860,292 L950,340" stroke="#1d4ed8" marker-end="url(#a-blue)"/>
+  <path class="arrow" d="M860,432 L950,395" stroke="#1d4ed8" marker-end="url(#a-blue)"/>
+  <path class="arrow" d="M860,622 L950,665" stroke="#15803d" marker-end="url(#a-green)"/>
+  <path class="arrow" d="M860,762 L950,725" stroke="#15803d" marker-end="url(#a-green)"/>
+  <circle cx="905" cy="365" r="12" fill="#1d4ed8"/><text class="step" x="900" y="370">4</text>
+  <circle cx="905" cy="695" r="12" fill="#15803d"/><text class="step" x="900" y="700">4</text>
+  <text class="label" x="868" y="275">пакет + ЕЦП ДВК</text>
+  <text class="label" x="868" y="800">пакет + ЕЦП ДВК</text>
+
+  <!-- СВК → ЦВК -->
+  <path class="arrow" d="M1220,365 C1265,365 1260,470 1300,470" stroke="#1d4ed8" marker-end="url(#a-blue)"/>
+  <path class="arrow" d="M1220,695 C1265,695 1260,600 1300,600" stroke="#15803d" marker-end="url(#a-green)"/>
+  <circle cx="1255" cy="420" r="12" fill="#1d4ed8"/><text class="step" x="1250" y="425">5</text>
+  <circle cx="1255" cy="650" r="12" fill="#15803d"/><text class="step" x="1250" y="655">5</text>
+  <text class="label" x="1230" y="345">зведений пакет</text>
+  <text class="label" x="1230" y="360">+ ЕЦП СВК</text>
+  <text class="label" x="1230" y="728">зведений пакет</text>
+  <text class="label" x="1230" y="743">+ ЕЦП СВК</text>
+
+  <!-- ЦВК → дошка, публікації -->
+  <path class="arrow" d="M1417,680 L1417,870" stroke="#7e22ce" marker-end="url(#a-purple)"/>
+  <circle cx="1417" cy="775" r="12" fill="#7e22ce"/><text class="step" x="1412" y="780">6</text>
+  <text class="label" x="1432" y="760">результати</text>
+  <path class="arrow dash" d="M1085,770 L1085,870" stroke="#6b7280" marker-end="url(#a-gray)"/>
+  <path class="arrow dash" d="M710,820 L710,870" stroke="#6b7280" marker-end="url(#a-gray)"/>
+  <text class="label" x="722" y="852">публікації ДВК</text>
+  <text class="label" x="1097" y="852">публікації СВК</text>
+
+  <!-- Перевірка і скарга -->
+  <path class="arrow dash" d="M200,870 L200,740" stroke="#6b7280" marker-end="url(#a-gray)"/>
+  <circle cx="200" cy="805" r="12" fill="#6b7280"/><text class="step" x="195" y="810">7</text>
+  <text class="label" x="216" y="800">перевірка за квитанцією</text>
+  <path class="arrow dash" d="M330,300 C360,215 900,205 1085,290" stroke="#6b7280" marker-end="url(#a-gray)"/>
+  <text class="label" x="660" y="205">скарга: власна підписана частина → СВК</text>
+</svg>

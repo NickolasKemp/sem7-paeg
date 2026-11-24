@@ -1,0 +1,51 @@
+<!doctype html><meta charset="utf-8"><title>node src/main.ts — крок 1: негативні сценарії реєстрації, публікація списків БР</title>
+<style>
+  html,body{margin:0;background:#11111b;}
+  .window{width:1005px;box-sizing:border-box;background:#1e1e2e;border-radius:10px;overflow:hidden;
+    font-family:Menlo,'SF Mono',monospace;font-size:15px;line-height:21px;color:#cdd6f4;}
+  .bar{height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#181825;}
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .bar span.t{margin-left:10px;color:#9399b2;font-size:12px;}
+  pre{margin:0;padding:26px;white-space:pre;}
+</style>
+<div class="window">
+  <div class="bar">
+    <div class="dot" style="background:#f38ba8"></div>
+    <div class="dot" style="background:#f9e2af"></div>
+    <div class="dot" style="background:#a6e3a1"></div>
+    <span class="t">node src/main.ts — крок 1: негативні сценарії реєстрації, публікація списків БР</span>
+  </div>
+  <pre>  ▸ Негативні сценарії реєстрації
+  <span style="font-weight:700">  Особа відсутня в реєстрі громадян: «Стороння Мальвіна Олегівна», ХХ999999</span>
+    <span style="color:#f38ba8">✘</span> [БР] Реєстр громадян: паспорта ХХ999999 немає в реєстрі
+    <span style="color:#f38ba8">✘</span> <span style="font-weight:700"><span style="color:#f38ba8">БР: ВІДМОВА [NOT_IN_ROLL] Особи з таким паспортом немає в реєстрі громадян</span></span>
+  <span style="font-weight:700">  Чужий паспорт: інше ПІБ: «Підставний Петро Петрович», АА100001</span>
+    <span style="color:#a6e3a1">✔</span> [БР] Реєстр громадян: паспорт АА100001 є в реєстрі
+    <span style="color:#f38ba8">✘</span> [БР] Звірка ПІБ: за паспортом зареєстровано «Коваленко Андрій Сергійович»
+    <span style="color:#f38ba8">✘</span> <span style="font-weight:700"><span style="color:#f38ba8">БР: ВІДМОВА [IDENTITY_MISMATCH] ПІБ не збігається з паспортними даними в реєстрі</span></span>
+  <span style="font-weight:700">  Неповнолітній громадянин: «Савченко Максим Ігорович», ВВ200005</span>
+    <span style="color:#a6e3a1">✔</span> [БР] Реєстр громадян: паспорт ВВ200005 є в реєстрі
+    <span style="color:#a6e3a1">✔</span> [БР] Звірка ПІБ: ПІБ збігається з реєстром
+    <span style="color:#f38ba8">✘</span> [БР] Право голосу: на день виборів 2026-11-15 виповниться 17 р.
+    <span style="color:#f38ba8">✘</span> <span style="font-weight:700"><span style="color:#f38ba8">БР: ВІДМОВА [NO_VOTING_RIGHT] Особа не має права голосу: на день виборів їй не виповниться 18 років</span></span>
+  <span style="font-weight:700">  Запит мандата іншої дільниці: «Мельник Остап Ігорович», ВВ200001</span>
+    <span style="color:#a6e3a1">✔</span> [БР] Реєстр громадян: паспорт ВВ200001 є в реєстрі
+    <span style="color:#a6e3a1">✔</span> [БР] Звірка ПІБ: ПІБ збігається з реєстром
+    <span style="color:#a6e3a1">✔</span> [БР] Право голосу: на день виборів 2026-11-15 виповниться 31 р.
+    <span style="color:#f38ba8">✘</span> [БР] Виборча дільниця: за реєстром — дільниця №2, запит — №1
+    <span style="color:#f38ba8">✘</span> <span style="font-weight:700"><span style="color:#f38ba8">БР: ВІДМОВА [WRONG_DISTRICT] Громадянин належить до іншої виборчої дільниці</span></span>
+  <span style="font-weight:700">  Повторна реєстрація: «Коваленко Андрій Сергійович», АА100001</span>
+    <span style="color:#a6e3a1">✔</span> [БР] Реєстр громадян: паспорт АА100001 є в реєстрі
+    <span style="color:#a6e3a1">✔</span> [БР] Звірка ПІБ: ПІБ збігається з реєстром
+    <span style="color:#a6e3a1">✔</span> [БР] Право голосу: на день виборів 2026-11-15 виповниться 36 р.
+    <span style="color:#a6e3a1">✔</span> [БР] Виборча дільниця: за реєстром — дільниця №1, запит — №1
+    <span style="color:#f38ba8">✘</span> [БР] Одноразовість: «Коваленко Андрій Сергійович» уже отримав мандат
+    <span style="color:#f38ba8">✘</span> <span style="font-weight:700"><span style="color:#f38ba8">БР: ВІДМОВА [ALREADY_REGISTERED] Виборець уже отримав сліпий підпис — другий мандат не видається</span></span>
+  БР публікує списки зареєстрованих по дільницях (без мандатів):
+<span style="opacity:.62">┌──────────┬───────────────┬───────────────────────────────────────────────────────────────────┐</span>
+<span style="opacity:.62">│</span> <span style="font-weight:700">Дільниця</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Зареєстровано</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Виборці</span>                                                           <span style="opacity:.62">│</span>
+<span style="opacity:.62">├──────────┼───────────────┼───────────────────────────────────────────────────────────────────┤</span>
+<span style="opacity:.62">│</span> 1        <span style="opacity:.62">│</span> 4             <span style="opacity:.62">│</span> Бондаренко Б. Ю., Коваленко А. С., Ткаченко М. В., Шевченко О. М. <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 2        <span style="opacity:.62">│</span> 4             <span style="opacity:.62">│</span> Кравченко І. О., Лисенко Д. А., Мельник О. І., Олійник Т. П.      <span style="opacity:.62">│</span>
+<span style="opacity:.62">└──────────┴───────────────┴───────────────────────────────────────────────────────────────────┘</span></pre>
+</div>

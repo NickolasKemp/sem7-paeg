@@ -1,0 +1,49 @@
+<!doctype html><meta charset="utf-8"><title>node --test tests/*.test.ts — модульні тести</title>
+<style>
+  html,body{margin:0;background:#11111b;}
+  .window{width:914px;box-sizing:border-box;background:#1e1e2e;border-radius:10px;overflow:hidden;
+    font-family:Menlo,'SF Mono',monospace;font-size:15px;line-height:21px;color:#cdd6f4;}
+  .bar{height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#181825;}
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .bar span.t{margin-left:10px;color:#9399b2;font-size:12px;}
+  pre{margin:0;padding:26px;white-space:pre;}
+</style>
+<div class="window">
+  <div class="bar">
+    <div class="dot" style="background:#f38ba8"></div>
+    <div class="dot" style="background:#f9e2af"></div>
+    <div class="dot" style="background:#a6e3a1"></div>
+    <span class="t">node --test tests/*.test.ts — модульні тести</span>
+  </div>
+  <pre>▶ RSA і сліпий підпис
+  <span style="color:#a6e3a1">✔ RSA(a) · RSA(b) mod n розшифровується в a · b <span style="color:#cdd6f4">(0.652791ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+  <span style="color:#a6e3a1">✔ ЕЦП не перевіряється після зміни тексту або чужим ключем <span style="color:#cdd6f4">(2.480584ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+  <span style="color:#a6e3a1">✔ знятий сліпий підпис збігається зі звичайним ЕЦП того самого тексту <span style="color:#cdd6f4">(0.546833ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+  <span style="color:#a6e3a1">✔ перебір знаходить малі значення, але не випадкову частину <span style="color:#cdd6f4">(1.597291ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ RSA і сліпий підпис <span style="color:#cdd6f4">(6.057792ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+▶ Поділ бюлетеня
+  <span style="color:#a6e3a1">✔ m₁ · m₂ ≡ m mod n, а RSA(m₁) · RSA(m₂) розшифровується в m <span style="color:#cdd6f4">(7.256583ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ Поділ бюлетеня <span style="color:#cdd6f4">(7.969458ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+▶ БР
+  <span style="color:#a6e3a1">✔ видає мандат зі сліпим ЕЦП, який перевіряється ключем дільниці <span style="color:#cdd6f4">(38.780875ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+  <span style="color:#a6e3a1">✔ відмовляє неповнолітньому, чужій дільниці та повторній реєстрації <span style="color:#cdd6f4">(43.264208ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+  <span style="color:#a6e3a1">✔ не бачить мандата: замаскований хеш не збігається з хешем мандата <span style="color:#cdd6f4">(38.180917ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ БР <span style="color:#cdd6f4">(120.40175ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+▶ ДВК
+  <span style="color:#a6e3a1">✔ приймає дві частини і відхиляє повторне голосування <span style="color:#cdd6f4">(36.491417ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+  <span style="color:#a6e3a1">✔ відхиляє мандат без ЕЦП БР, підміну частини і чужий ключ <span style="color:#cdd6f4">(39.769666ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+  <span style="color:#a6e3a1">✔ відхиляє частину іншої гілки або дільниці <span style="color:#cdd6f4">(33.860042ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ ДВК <span style="color:#cdd6f4">(110.288375ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+▶ Підрахунок і аудит
+  <span style="color:#a6e3a1">✔ штатне голосування: ЦВК відновлює бюлетені, виборці і аудит не мають зауважень <span style="color:#cdd6f4">(41.48375ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+  <span style="color:#a6e3a1">✔ ДВК підміняє частину: СВК відкидає її, скарга виборця відновлює голос <span style="color:#cdd6f4">(32.324791ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+  <span style="color:#a6e3a1">✔ СВК не може підмінити частину: ЦВК відкидає її, аудит вказує на СВК <span style="color:#cdd6f4">(34.874875ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+  <span style="color:#a6e3a1">✔ ЦВК не може змінити голос непомітно: mᵉ mod n ≠ C₁ · C₂ <span style="color:#cdd6f4">(35.074708ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+  <span style="color:#a6e3a1">✔ ЦВК відкидає пакет з чужим ЕЦП <span style="color:#cdd6f4">(34.51525ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+  <span style="color:#a6e3a1">✔ «мертва душа» від БР виявляється, коли бюлетенів більше, ніж зареєстрованих <span style="color:#cdd6f4">(41.25725ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ Підрахунок і аудит <span style="color:#cdd6f4">(219.745583ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#cdd6f4">ℹ tests 17<span style="color:#cdd6f4"></span></span>
+<span style="color:#cdd6f4">ℹ pass 17<span style="color:#cdd6f4"></span></span>
+<span style="color:#cdd6f4">ℹ fail 0<span style="color:#cdd6f4"></span></span>
+<span style="color:#cdd6f4">ℹ duration_ms 668.224791<span style="color:#cdd6f4"></span></span></pre>
+</div>

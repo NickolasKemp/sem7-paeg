@@ -1,0 +1,36 @@
+<!doctype html><meta charset="utf-8"><title>node src/main.ts — негативні сценарії 1–4: кількість бюлетенів, ЕЦП</title>
+<style>
+  html,body{margin:0;background:#11111b;}
+  .window{width:1230px;box-sizing:border-box;background:#1e1e2e;border-radius:10px;overflow:hidden;
+    font-family:Menlo,'SF Mono',monospace;font-size:15px;line-height:21px;color:#cdd6f4;}
+  .bar{height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#181825;}
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .bar span.t{margin-left:10px;color:#9399b2;font-size:12px;}
+  pre{margin:0;padding:26px;white-space:pre;}
+</style>
+<div class="window">
+  <div class="bar">
+    <div class="dot" style="background:#f38ba8"></div>
+    <div class="dot" style="background:#f9e2af"></div>
+    <div class="dot" style="background:#a6e3a1"></div>
+    <span class="t">node src/main.ts — негативні сценарії 1–4: кількість бюлетенів, ЕЦП</span>
+  </div>
+  <pre><span style="font-weight:700"><span style="color:#f9e2af">▌ НЕГАТИВНІ СЦЕНАРІЇ</span></span>
+<span style="opacity:.62">──────────────────────────────────────────────────────────────────────────────────────────────</span>
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Сценарій 1. Додавання бюлетеня: сторонній додає 6-й бюлетень до набору, який збирає A
+    <span style="color:#f38ba8">✘</span> A, перший раунд розшифрування: <span style="font-weight:700">COUNT_MISMATCH</span> — отримано бюлетенів: 6, учасників: 5
+    <span style="opacity:.62">·</span> <span style="opacity:.62">Кількість бюлетенів не дорівнює кількості учасників; протокол зупинено, бюлетені не розшифровано до кінця</span>
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Сценарій 2. Видалення бюлетеня: нечесний C видаляє один бюлетень і чесно підписує набір
+    <span style="color:#f38ba8">✘</span> D, перший раунд розшифрування: <span style="font-weight:700">COUNT_MISMATCH</span> — отримано бюлетенів: 4, учасників: 5
+    <span style="opacity:.62">·</span> <span style="opacity:.62">Кількість бюлетенів не дорівнює кількості учасників; протокол зупинено, бюлетені не розшифровано до кінця</span>
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Сценарій 3. Підміна в каналі: у наборі B → C один бюлетень замінено, ЕЦП B залишено
+    <span style="color:#f38ba8">✘</span> C, перший раунд розшифрування: <span style="font-weight:700">BAD_SIGNATURE</span> — ЕЦП набору не відповідає відкритому ключу B
+    <span style="opacity:.62">·</span> <span style="opacity:.62">ЕЦП набору не пройшов перевірку відкритим ключем попереднього учасника; протокол зупинено, бюлетені не розшифровано до кінця</span>
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Сценарій 4. Підробка ЕЦП: зловмисник підписує набір своїм ключем від імені B
+    <span style="color:#f38ba8">✘</span> C, перший раунд розшифрування: <span style="font-weight:700">BAD_SIGNATURE</span> — ЕЦП набору не відповідає відкритому ключу B
+    <span style="opacity:.62">·</span> <span style="opacity:.62">ЕЦП набору не пройшов перевірку відкритим ключем попереднього учасника; протокол зупинено, бюлетені не розшифровано до кінця</span></pre>
+</div>

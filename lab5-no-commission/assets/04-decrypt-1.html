@@ -1,0 +1,29 @@
+<!doctype html><meta charset="utf-8"><title>node src/main.ts — крок 3: перший раунд розшифрування</title>
+<style>
+  html,body{margin:0;background:#11111b;}
+  .window{width:1203px;box-sizing:border-box;background:#1e1e2e;border-radius:10px;overflow:hidden;
+    font-family:Menlo,'SF Mono',monospace;font-size:15px;line-height:21px;color:#cdd6f4;}
+  .bar{height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#181825;}
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .bar span.t{margin-left:10px;color:#9399b2;font-size:12px;}
+  pre{margin:0;padding:26px;white-space:pre;}
+</style>
+<div class="window">
+  <div class="bar">
+    <div class="dot" style="background:#f38ba8"></div>
+    <div class="dot" style="background:#f9e2af"></div>
+    <div class="dot" style="background:#a6e3a1"></div>
+    <span class="t">node src/main.ts — крок 3: перший раунд розшифрування</span>
+  </div>
+  <pre><span style="font-weight:700"><span style="color:#f9e2af">▌ КРОК 3. ПЕРШИЙ РАУНД РОЗШИФРУВАННЯ (A → B → C → D → E, перевірка RP²)</span></span>
+<span style="opacity:.62">──────────────────────────────────────────────────────────────────────────────────────────────</span>
+<span style="opacity:.62">┌──────────┬──────────────────┬───────────┬──────────────────────────────────┬───────────────────────────────────┬────────────┐</span>
+<span style="opacity:.62">│</span> <span style="font-weight:700">Виборець</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Від кого / ЕЦП</span>   <span style="opacity:.62">│</span> <span style="font-weight:700">Кількість</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Власний RP</span>                       <span style="opacity:.62">│</span> <span style="font-weight:700">Після кроку: довжини (перемішано)</span> <span style="opacity:.62">│</span> <span style="font-weight:700">ЕЦП набору</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">├──────────┼──────────────────┼───────────┼──────────────────────────────────┼───────────────────────────────────┼────────────┤</span>
+<span style="opacity:.62">│</span> A        <span style="opacity:.62">│</span> зібрано від усіх <span style="opacity:.62">│</span> 5 <span style="color:#a6e3a1">✔</span>       <span style="opacity:.62">│</span> f5d8 a633 … знайдено, видалено <span style="color:#a6e3a1">✔</span> <span style="opacity:.62">│</span> 7296, 9280, 8224, 7696, 7432      <span style="opacity:.62">│</span> 0x7cd62fc5 <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> B        <span style="opacity:.62">│</span> A <span style="color:#a6e3a1">✔</span>              <span style="opacity:.62">│</span> 5 <span style="color:#a6e3a1">✔</span>       <span style="opacity:.62">│</span> bfa5 135f … знайдено, видалено <span style="color:#a6e3a1">✔</span> <span style="opacity:.62">│</span> 4112, 3712, 3648, 4640, 3848      <span style="opacity:.62">│</span> 0xb435358e <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> C        <span style="opacity:.62">│</span> B <span style="color:#a6e3a1">✔</span>              <span style="opacity:.62">│</span> 5 <span style="color:#a6e3a1">✔</span>       <span style="opacity:.62">│</span> 4ec8 3c91 … знайдено, видалено <span style="color:#a6e3a1">✔</span> <span style="opacity:.62">│</span> 2056, 1824, 2320, 1920, 1856      <span style="opacity:.62">│</span> 0x4eeda75d <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> D        <span style="opacity:.62">│</span> C <span style="color:#a6e3a1">✔</span>              <span style="opacity:.62">│</span> 5 <span style="color:#a6e3a1">✔</span>       <span style="opacity:.62">│</span> 2663 c557 … знайдено, видалено <span style="color:#a6e3a1">✔</span> <span style="opacity:.62">│</span> 1160, 912, 1024, 960, 928         <span style="opacity:.62">│</span> 0x36f04f65 <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> E        <span style="opacity:.62">│</span> D <span style="color:#a6e3a1">✔</span>              <span style="opacity:.62">│</span> 5 <span style="color:#a6e3a1">✔</span>       <span style="opacity:.62">│</span> 5918 fa22 … знайдено, видалено <span style="color:#a6e3a1">✔</span> <span style="opacity:.62">│</span> 464, 456, 512, 576, 480           <span style="opacity:.62">│</span> 0x5c297421 <span style="opacity:.62">│</span>
+<span style="opacity:.62">└──────────┴──────────────────┴───────────┴──────────────────────────────────┴───────────────────────────────────┴────────────┘</span></pre>
+</div>

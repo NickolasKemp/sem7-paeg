@@ -1,0 +1,46 @@
+<!doctype html><meta charset="utf-8"><title>node src/main.ts — негативні сценарії 5–9: RP, копіювання, відмова учасника, хибний підсумок</title>
+<style>
+  html,body{margin:0;background:#11111b;}
+  .window{width:1104px;box-sizing:border-box;background:#1e1e2e;border-radius:10px;overflow:hidden;
+    font-family:Menlo,'SF Mono',monospace;font-size:15px;line-height:21px;color:#cdd6f4;}
+  .bar{height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#181825;}
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .bar span.t{margin-left:10px;color:#9399b2;font-size:12px;}
+  pre{margin:0;padding:26px;white-space:pre;}
+</style>
+<div class="window">
+  <div class="bar">
+    <div class="dot" style="background:#f38ba8"></div>
+    <div class="dot" style="background:#f9e2af"></div>
+    <div class="dot" style="background:#a6e3a1"></div>
+    <span class="t">node src/main.ts — негативні сценарії 5–9: RP, копіювання, відмова учасника, хибний підсумок</span>
+  </div>
+  <pre>  ▸ Сценарій 5. Відсутній RP: нечесний A замінює бюлетень D на сфабрикований (кількість не змінюється)
+    <span style="color:#f38ba8">✘</span> D, перший раунд розшифрування: <span style="font-weight:700">RP_NOT_FOUND</span> — власний RP з раунду шифрування 2 відсутній
+    <span style="opacity:.62">·</span> <span style="opacity:.62">Серед бюлетенів немає жодного з власним RP виборця; протокол зупинено, бюлетені не розшифровано до кінця</span>
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Сценарій 6. Неправильний RP: у другому раунді B знаходить бюлетень C за довжиною і підміняє його
+    <span style="opacity:.62">·</span> <span style="opacity:.62">B: бюлетень C має довжину 120 — позиція 4 у перемішаному наборі; підставлено голос «Іван Коваленко» з чужим RP</span>
+    <span style="color:#f38ba8">✘</span> C, другий раунд розшифрування: <span style="font-weight:700">RP_NOT_FOUND</span> — власний RP з раунду шифрування 1 відсутній
+    <span style="opacity:.62">·</span> <span style="opacity:.62">Серед бюлетенів немає жодного з власним RP виборця; протокол зупинено, бюлетені не розшифровано до кінця</span>
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Сценарій 7. Копіювання: A замінює бюлетень D копією бюлетеня B, щоб дізнатися вибір B
+    <span style="color:#f38ba8">✘</span> B, перший раунд розшифрування: <span style="font-weight:700">RP_DUPLICATE</span> — власний RP знайдено у 2 бюлетенях — хтось скопіював бюлетень
+    <span style="opacity:.62">·</span> <span style="opacity:.62">Власний RP виборця знайдено у кількох бюлетенях; протокол зупинено, бюлетені не розшифровано до кінця</span>
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Сценарій 8. Відмова учасника: C не передає набір далі
+    <span style="color:#f38ba8">✘</span> D, перший раунд розшифрування: <span style="font-weight:700">NOT_RECEIVED</span> — попередній учасник не передав набір — протокол зупинено
+    <span style="opacity:.62">·</span> <span style="opacity:.62">Набір від попереднього учасника не надійшов; протокол зупинено, бюлетені не розшифровано до кінця</span>
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Сценарій 9. Хибний результат: E публікує правильний набір, але оголошує інший підрахунок
+    <span style="opacity:.62">·</span> <span style="opacity:.62">оголошено E: Олена Петренко: 2, Іван Коваленко: 3, недійсних: 0</span>
+<span style="opacity:.62">┌──────────┬───────────────────────────────────────────────────────────────────────────────┐</span>
+<span style="opacity:.62">│</span> <span style="font-weight:700">Виборець</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Результат перевірки</span>                                                           <span style="opacity:.62">│</span>
+<span style="opacity:.62">├──────────┼───────────────────────────────────────────────────────────────────────────────┤</span>
+<span style="opacity:.62">│</span> A        <span style="opacity:.62">│</span> <span style="color:#f38ba8">✘ TALLY_MISMATCH: Повторний підрахунок не збігається з оголошеним результатом</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> B        <span style="opacity:.62">│</span> <span style="color:#f38ba8">✘ TALLY_MISMATCH: Повторний підрахунок не збігається з оголошеним результатом</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> C        <span style="opacity:.62">│</span> <span style="color:#f38ba8">✘ TALLY_MISMATCH: Повторний підрахунок не збігається з оголошеним результатом</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> D        <span style="opacity:.62">│</span> <span style="color:#f38ba8">✘ TALLY_MISMATCH: Повторний підрахунок не збігається з оголошеним результатом</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> E        <span style="opacity:.62">│</span> <span style="color:#f38ba8">✘ TALLY_MISMATCH: Повторний підрахунок не збігається з оголошеним результатом</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">└──────────┴───────────────────────────────────────────────────────────────────────────────┘</span></pre>
+</div>

@@ -1,0 +1,39 @@
+<!doctype html><meta charset="utf-8"><title>node --test tests/*.test.ts — модульні тести</title>
+<style>
+  html,body{margin:0;background:#11111b;}
+  .window{width:869px;box-sizing:border-box;background:#1e1e2e;border-radius:10px;overflow:hidden;
+    font-family:Menlo,'SF Mono',monospace;font-size:15px;line-height:21px;color:#cdd6f4;}
+  .bar{height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#181825;}
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .bar span.t{margin-left:10px;color:#9399b2;font-size:12px;}
+  pre{margin:0;padding:26px;white-space:pre;}
+</style>
+<div class="window">
+  <div class="bar">
+    <div class="dot" style="background:#f38ba8"></div>
+    <div class="dot" style="background:#f9e2af"></div>
+    <div class="dot" style="background:#a6e3a1"></div>
+    <span class="t">node --test tests/*.test.ts — модульні тести</span>
+  </div>
+  <pre><span style="color:#a6e3a1">✔ усі виборці мають однакову копію списку з відкритими ключами <span style="color:#cdd6f4">(1.162ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ чесний прогін: 10 етапів, початкові бюлетені, однаковий підрахунок у всіх <span style="color:#cdd6f4">(259.686459ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ додавання бюлетеня виявляє перший виборець <span style="color:#cdd6f4">(72.106667ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ видалення бюлетеня з чесним підписом виявляє наступний виборець <span style="color:#cdd6f4">(222.548959ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ зміна набору в каналі та підпис чужим ключем дають BAD_SIGNATURE <span style="color:#cdd6f4">(405.407125ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ набір не від попереднього учасника відхиляється <span style="color:#cdd6f4">(195.371417ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ замінений бюлетень без RP виявляє його власник у першому раунді <span style="color:#cdd6f4">(234.235458ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ бюлетень з неправильним RP виявляє його власник у другому раунді <span style="color:#cdd6f4">(263.704209ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ копія чужого бюлетеня виявляється як повторний RP <span style="color:#cdd6f4">(197.413917ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ відмова учасника зупиняє протокол <span style="color:#cdd6f4">(221.481125ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ хибний оголошений підсумок і підмінений опублікований набір виявляє кожен <span style="color:#cdd6f4">(249.243333ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ після свого кроку в другому раунді D розпізнає голоси A–D <span style="color:#cdd6f4">(274.376416ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ e·d ≡ 1 mod φ(n) для згенерованої пари ключів <span style="color:#cdd6f4">(0.765333ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ шар подвоює довжину і знімається лише власним закритим ключем <span style="color:#cdd6f4">(0.21275ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ багатошарове шифрування: результат шару — вхідні дані наступного <span style="color:#cdd6f4">(1.633125ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ без зчеплення RP не приховує повідомлення, зі зчепленням — змінює весь шар <span style="color:#cdd6f4">(0.21575ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#a6e3a1">✔ ЕЦП перевіряється ключем підписувача і не переноситься на змінений текст <span style="color:#cdd6f4">(0.138125ms)<span style="color:#cdd6f4"><span style="color:#cdd6f4"></span></span></span></span>
+<span style="color:#cdd6f4">ℹ tests 17<span style="color:#cdd6f4"></span></span>
+<span style="color:#cdd6f4">ℹ pass 17<span style="color:#cdd6f4"></span></span>
+<span style="color:#cdd6f4">ℹ fail 0<span style="color:#cdd6f4"></span></span>
+<span style="color:#cdd6f4">ℹ duration_ms 2813.489791<span style="color:#cdd6f4"></span></span></pre>
+</div>

@@ -1,0 +1,51 @@
+<!doctype html><meta charset="utf-8"><title>node src/main.ts — аналіз властивостей і складності протоколу</title>
+<style>
+  html,body{margin:0;background:#11111b;}
+  .window{width:1086px;box-sizing:border-box;background:#1e1e2e;border-radius:10px;overflow:hidden;
+    font-family:Menlo,'SF Mono',monospace;font-size:15px;line-height:21px;color:#cdd6f4;}
+  .bar{height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#181825;}
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .bar span.t{margin-left:10px;color:#9399b2;font-size:12px;}
+  pre{margin:0;padding:26px;white-space:pre;}
+</style>
+<div class="window">
+  <div class="bar">
+    <div class="dot" style="background:#f38ba8"></div>
+    <div class="dot" style="background:#f9e2af"></div>
+    <div class="dot" style="background:#a6e3a1"></div>
+    <span class="t">node src/main.ts — аналіз властивостей і складності протоколу</span>
+  </div>
+  <pre><span style="font-weight:700"><span style="color:#f9e2af">▌ АНАЛІЗ ВЛАСТИВОСТЕЙ І ОБМЕЖЕНЬ</span></span>
+<span style="opacity:.62">──────────────────────────────────────────────────────────────────────────────────────────────</span>
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Довжина бюлетеня залежить від позиції власника (RP дописується перед різними шарами)
+<span style="opacity:.62">┌─────────┬──────────────────┬──────────────────────────────────────────┐</span>
+<span style="opacity:.62">│</span> <span style="font-weight:700">Власник</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Позиція в списку</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Довжина зашифрованого бюлетеня, символів</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">├─────────┼──────────────────┼──────────────────────────────────────────┤</span>
+<span style="opacity:.62">│</span> A       <span style="opacity:.62">│</span> 1                <span style="opacity:.62">│</span> 14600                                    <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> B       <span style="opacity:.62">│</span> 2                <span style="opacity:.62">│</span> 14864                                    <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> C       <span style="opacity:.62">│</span> 3                <span style="opacity:.62">│</span> 15392                                    <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> D       <span style="opacity:.62">│</span> 4                <span style="opacity:.62">│</span> 16448                                    <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> E       <span style="opacity:.62">│</span> 5                <span style="opacity:.62">│</span> 18560                                    <span style="opacity:.62">│</span>
+<span style="opacity:.62">└─────────┴──────────────────┴──────────────────────────────────────────┘</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">перемішування не приховує, чий бюлетень, поки RP власника не видалено; вміст при цьому прихований зчепленням</span>
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Що бачить D після свого кроку в другому раунді розшифрування
+    <span style="opacity:.62">·</span> <span style="opacity:.62">бюлетені A–D мають вигляд RSA_E(EVP) без RP — D шифрує обидва EVP ключем E і рахує збіги:</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">Олена Петренко: 2, Іван Коваленко: 2 (розпізнано 4 з 5)</span>
+    <span style="color:#f38ba8">✘</span> порівнявши з оголошеним результатом, D дізнається вибір E: Олена Петренко
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Складність: кількість операцій RSA і обсяг даних
+    <span style="opacity:.62">·</span> <span style="opacity:.62">шарів: 50 накладено і 50 знято; RSA над окремими символами: 79754 шифрувань і стільки ж розшифрувань</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">ЕЦП наборів: 10, перевірок ЕЦП: 14; передано між учасниками: 159578 символів</span>
+<span style="opacity:.62">┌──────────┬───────────────────┬──────────────────────────────┬───────────────────────────────┐</span>
+<span style="opacity:.62">│</span> <span style="font-weight:700">Виборців</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Шарів на бюлетень</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Найдовший бюлетень, символів</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Набір, МБ (2 байти на символ)</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">├──────────┼───────────────────┼──────────────────────────────┼───────────────────────────────┤</span>
+<span style="opacity:.62">│</span> 3        <span style="opacity:.62">│</span> 6                 <span style="opacity:.62">│</span> 1 184                        <span style="opacity:.62">│</span> 0.01                          <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 4        <span style="opacity:.62">│</span> 8                 <span style="opacity:.62">│</span> 4 672                        <span style="opacity:.62">│</span> 0.04                          <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 5        <span style="opacity:.62">│</span> 10                <span style="opacity:.62">│</span> 18 560                       <span style="opacity:.62">│</span> 0.18                          <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 7        <span style="opacity:.62">│</span> 14                <span style="opacity:.62">│</span> 295 424                      <span style="opacity:.62">│</span> 3.94                          <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 10       <span style="opacity:.62">│</span> 20                <span style="opacity:.62">│</span> 18 878 464                   <span style="opacity:.62">│</span> 360.08                        <span style="opacity:.62">│</span>
+<span style="opacity:.62">└──────────┴───────────────────┴──────────────────────────────┴───────────────────────────────┘</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">кожен шар подвоює довжину (символ → 32-бітне число = 2 символи), RP = 4 символи</span></pre>
+</div>

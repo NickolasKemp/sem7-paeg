@@ -1,0 +1,55 @@
+<!doctype html><meta charset="utf-8"><title>node src/main.ts — посимвольне багатошарове RSA-шифрування</title>
+<style>
+  html,body{margin:0;background:#11111b;}
+  .window{width:1167px;box-sizing:border-box;background:#1e1e2e;border-radius:10px;overflow:hidden;
+    font-family:Menlo,'SF Mono',monospace;font-size:15px;line-height:21px;color:#cdd6f4;}
+  .bar{height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#181825;}
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .bar span.t{margin-left:10px;color:#9399b2;font-size:12px;}
+  pre{margin:0;padding:26px;white-space:pre;}
+</style>
+<div class="window">
+  <div class="bar">
+    <div class="dot" style="background:#f38ba8"></div>
+    <div class="dot" style="background:#f9e2af"></div>
+    <div class="dot" style="background:#a6e3a1"></div>
+    <span class="t">node src/main.ts — посимвольне багатошарове RSA-шифрування</span>
+  </div>
+  <pre><span style="font-weight:700"><span style="color:#f9e2af">▌ ПОСИМВОЛЬНЕ БАГАТОШАРОВЕ RSA-ШИФРУВАННЯ</span></span>
+<span style="opacity:.62">──────────────────────────────────────────────────────────────────────────────────────────────</span>
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Один шар: символи шифруються окремо ключем A (e = 65537, n = 4097157919)
+    cᵢ = ((mᵢ + cᵢ₊₁) mod n)^e mod n — кожен символ залежить від шифротексту символу праворуч
+<span style="opacity:.62">┌───┬────────┬──────┬────────────┬────────────┬──────────────────────────────┐</span>
+<span style="opacity:.62">│</span> <span style="font-weight:700">i</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Символ</span> <span style="opacity:.62">│</span> <span style="font-weight:700">mᵢ</span>   <span style="opacity:.62">│</span> <span style="font-weight:700">cᵢ₊₁</span>       <span style="opacity:.62">│</span> <span style="font-weight:700">cᵢ</span>         <span style="opacity:.62">│</span> <span style="font-weight:700">cᵢ у шифротексті (2 символи)</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">├───┼────────┼──────┼────────────┼────────────┼──────────────────────────────┤</span>
+<span style="opacity:.62">│</span> 1 <span style="opacity:.62">│</span> О      <span style="opacity:.62">│</span> 1054 <span style="opacity:.62">│</span> 1246964997 <span style="opacity:.62">│</span> 2231262100 <span style="opacity:.62">│</span> 84fe 5b94                    <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 2 <span style="opacity:.62">│</span> л      <span style="opacity:.62">│</span> 1083 <span style="opacity:.62">│</span> 1123945318 <span style="opacity:.62">│</span> 1246964997 <span style="opacity:.62">│</span> 4a53 2d05                    <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 3 <span style="opacity:.62">│</span> е      <span style="opacity:.62">│</span> 1077 <span style="opacity:.62">│</span> 1022250938 <span style="opacity:.62">│</span> 1123945318 <span style="opacity:.62">│</span> 42fe 0b66                    <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 4 <span style="opacity:.62">│</span> н      <span style="opacity:.62">│</span> 1085 <span style="opacity:.62">│</span> 2266918979 <span style="opacity:.62">│</span> 1022250938 <span style="opacity:.62">│</span> 3cee 4fba                    <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 5 <span style="opacity:.62">│</span> а      <span style="opacity:.62">│</span> 1072 <span style="opacity:.62">│</span> 0          <span style="opacity:.62">│</span> 2266918979 <span style="opacity:.62">│</span> 871e 7043                    <span style="opacity:.62">│</span>
+<span style="opacity:.62">└───┴────────┴──────┴────────────┴────────────┴──────────────────────────────┘</span>
+    <span style="color:#a6e3a1">✔</span> розшифрування закритим ключем A: «Олена»
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Навіщо зчеплення: два шифрування EVP || RP з різними RP
+<span style="opacity:.62">┌───────────────────┬────────────────────────────┬────────────────────────────┬──────────────────┐</span>
+<span style="opacity:.62">│</span> <span style="font-weight:700">Режим</span>             <span style="opacity:.62">│</span> <span style="font-weight:700">RSA(EVP || RP₁)</span>            <span style="opacity:.62">│</span> <span style="font-weight:700">RSA(EVP || RP₂)</span>            <span style="opacity:.62">│</span> <span style="font-weight:700">Спільний префікс</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">├───────────────────┼────────────────────────────┼────────────────────────────┼──────────────────┤</span>
+<span style="opacity:.62">│</span> незалежні символи <span style="opacity:.62">│</span> 74c7 623e 68b2 481c 0fc8 … <span style="opacity:.62">│</span> 74c7 623e 68b2 481c 0fc8 … <span style="opacity:.62">│</span> 28 з 36 символів <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> зі зчепленням     <span style="opacity:.62">│</span> 4c7b 7be0 0a07 7a48 36e5 … <span style="opacity:.62">│</span> cd46 13e7 e387 9af4 81f4 … <span style="opacity:.62">│</span> 0 з 36 символів  <span style="opacity:.62">│</span>
+<span style="opacity:.62">└───────────────────┴────────────────────────────┴────────────────────────────┴──────────────────┘</span>
+    <span style="color:#f38ba8">✘</span> без зчеплення RSA(EVP || RP) = RSA(EVP) || RSA(RP): будь-хто зашифрує ім’я кандидата відкритим ключем і впізнає голос
+    <span style="color:#a6e3a1">✔</span> зі зчепленням RP, дописаний у кінець, змінює кожен символ шару — однакові EVP стають непорівнюваними
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Багатошаровість: результат шару — вхідні дані наступного (порядок E → D → C → B → A)
+<span style="opacity:.62">┌───────┬───────────────────┬────────────────────┬───────────────────────┐</span>
+<span style="opacity:.62">│</span> <span style="font-weight:700">Шар</span>   <span style="opacity:.62">│</span> <span style="font-weight:700">Символів на вході</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Символів на виході</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Початок шифротексту</span>   <span style="opacity:.62">│</span>
+<span style="opacity:.62">├───────┼───────────────────┼────────────────────┼───────────────────────┤</span>
+<span style="opacity:.62">│</span> RSA_E <span style="opacity:.62">│</span> 14                <span style="opacity:.62">│</span> 28                 <span style="opacity:.62">│</span> 39ce 2881 2283 fca2 … <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> RSA_D <span style="opacity:.62">│</span> 28                <span style="opacity:.62">│</span> 56                 <span style="opacity:.62">│</span> 16c1 83fc 2141 407a … <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> RSA_C <span style="opacity:.62">│</span> 56                <span style="opacity:.62">│</span> 112                <span style="opacity:.62">│</span> 9152 b614 52bf b961 … <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> RSA_B <span style="opacity:.62">│</span> 112               <span style="opacity:.62">│</span> 224                <span style="opacity:.62">│</span> 99d5 d907 3541 d4d9 … <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> RSA_A <span style="opacity:.62">│</span> 224               <span style="opacity:.62">│</span> 448                <span style="opacity:.62">│</span> cc29 f7e4 91aa f554 … <span style="opacity:.62">│</span>
+<span style="opacity:.62">└───────┴───────────────────┴────────────────────┴───────────────────────┘</span>
+    <span style="color:#a6e3a1">✔</span> послідовне зняття шарів A → B → C → D → E повертає «Олена Петренко»</pre>
+</div>

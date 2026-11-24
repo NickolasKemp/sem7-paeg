@@ -1,0 +1,48 @@
+<!doctype html><meta charset="utf-8"><title>node src/main.ts — крок 2: бюлетені, RP¹ і RP², два раунди шифрування</title>
+<style>
+  html,body{margin:0;background:#11111b;}
+  .window{width:1113px;box-sizing:border-box;background:#1e1e2e;border-radius:10px;overflow:hidden;
+    font-family:Menlo,'SF Mono',monospace;font-size:15px;line-height:21px;color:#cdd6f4;}
+  .bar{height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#181825;}
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .bar span.t{margin-left:10px;color:#9399b2;font-size:12px;}
+  pre{margin:0;padding:26px;white-space:pre;}
+</style>
+<div class="window">
+  <div class="bar">
+    <div class="dot" style="background:#f38ba8"></div>
+    <div class="dot" style="background:#f9e2af"></div>
+    <div class="dot" style="background:#a6e3a1"></div>
+    <span class="t">node src/main.ts — крок 2: бюлетені, RP¹ і RP², два раунди шифрування</span>
+  </div>
+  <pre><span style="font-weight:700"><span style="color:#f9e2af">▌ КРОК 2. ФОРМУВАННЯ ТА БАГАТОШАРОВЕ ШИФРУВАННЯ БЮЛЕТЕНІВ</span></span>
+<span style="opacity:.62">──────────────────────────────────────────────────────────────────────────────────────────────</span>
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Шари бюлетеня виборця C: C₂ = RSA_A(RSA_B(RSA_C(RSA_D(RSA_E(C₁)) || RP²_C)))
+<span style="opacity:.62">┌───────┬───────┬────────────────┬───────────────────┐</span>
+<span style="opacity:.62">│</span> <span style="font-weight:700">Раунд</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Шар</span>   <span style="opacity:.62">│</span> <span style="font-weight:700">RP перед шаром</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Довжина, символів</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">├───────┼───────┼────────────────┼───────────────────┤</span>
+<span style="opacity:.62">│</span> 1     <span style="opacity:.62">│</span> RSA_E <span style="opacity:.62">│</span> —              <span style="opacity:.62">│</span> 28                <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 1     <span style="opacity:.62">│</span> RSA_D <span style="opacity:.62">│</span> —              <span style="opacity:.62">│</span> 56                <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 1     <span style="opacity:.62">│</span> RSA_C <span style="opacity:.62">│</span> <span style="color:#f9e2af">так: RP¹_C</span>     <span style="opacity:.62">│</span> 120               <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 1     <span style="opacity:.62">│</span> RSA_B <span style="opacity:.62">│</span> —              <span style="opacity:.62">│</span> 240               <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 1     <span style="opacity:.62">│</span> RSA_A <span style="opacity:.62">│</span> —              <span style="opacity:.62">│</span> 480               <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 2     <span style="opacity:.62">│</span> RSA_E <span style="opacity:.62">│</span> —              <span style="opacity:.62">│</span> 960               <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 2     <span style="opacity:.62">│</span> RSA_D <span style="opacity:.62">│</span> —              <span style="opacity:.62">│</span> 1920              <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 2     <span style="opacity:.62">│</span> RSA_C <span style="opacity:.62">│</span> <span style="color:#f9e2af">так: RP²_C</span>     <span style="opacity:.62">│</span> 3848              <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 2     <span style="opacity:.62">│</span> RSA_B <span style="opacity:.62">│</span> —              <span style="opacity:.62">│</span> 7696              <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 2     <span style="opacity:.62">│</span> RSA_A <span style="opacity:.62">│</span> —              <span style="opacity:.62">│</span> 15392             <span style="opacity:.62">│</span>
+<span style="opacity:.62">└───────┴───────┴────────────────┴───────────────────┘</span>
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Бюлетені всіх виборців (RP зберігаються у власників)
+<span style="opacity:.62">┌──────────┬────────────────┬─────────────────────┬─────────────────────┬─────────────────────┬─────────────────────┐</span>
+<span style="opacity:.62">│</span> <span style="font-weight:700">Виборець</span> <span style="opacity:.62">│</span> <span style="font-weight:700">EVP (вибір)</span>    <span style="opacity:.62">│</span> <span style="font-weight:700">RP¹ (раунд 1)</span>       <span style="opacity:.62">│</span> <span style="font-weight:700">RP² (раунд 2)</span>       <span style="opacity:.62">│</span> <span style="font-weight:700">Довжина шифротексту</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Початок шифротексту</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">├──────────┼────────────────┼─────────────────────┼─────────────────────┼─────────────────────┼─────────────────────┤</span>
+<span style="opacity:.62">│</span> A        <span style="opacity:.62">│</span> Олена Петренко <span style="opacity:.62">│</span> b5df 7a09 a012 2677 <span style="opacity:.62">│</span> f5d8 a633 5c60 be93 <span style="opacity:.62">│</span> 14600               <span style="opacity:.62">│</span> c341 8224 2e0f …    <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> B        <span style="opacity:.62">│</span> Іван Коваленко <span style="opacity:.62">│</span> 3190 459f a942 cc13 <span style="opacity:.62">│</span> bfa5 135f 723a ff1c <span style="opacity:.62">│</span> 14864               <span style="opacity:.62">│</span> 6c48 906f cd9c …    <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> C        <span style="opacity:.62">│</span> Олена Петренко <span style="opacity:.62">│</span> 0135 32a5 a934 82fd <span style="opacity:.62">│</span> 4ec8 3c91 fc63 88ad <span style="opacity:.62">│</span> 15392               <span style="opacity:.62">│</span> e259 089a 598e …    <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> D        <span style="opacity:.62">│</span> Іван Коваленко <span style="opacity:.62">│</span> 3649 9f6a 179d fa1d <span style="opacity:.62">│</span> 2663 c557 d5fe b0ea <span style="opacity:.62">│</span> 16448               <span style="opacity:.62">│</span> 1d56 2b7a ac55 …    <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> E        <span style="opacity:.62">│</span> Олена Петренко <span style="opacity:.62">│</span> 23bb 4d0a 8454 a226 <span style="opacity:.62">│</span> 5918 fa22 e606 e41e <span style="opacity:.62">│</span> 18560               <span style="opacity:.62">│</span> aeda f99e 1636 …    <span style="opacity:.62">│</span>
+<span style="opacity:.62">└──────────┴────────────────┴─────────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘</span>
+    <span style="color:#a6e3a1">✔</span> усі 5 повністю зашифрованих бюлетенів передано виборцю A</pre>
+</div>

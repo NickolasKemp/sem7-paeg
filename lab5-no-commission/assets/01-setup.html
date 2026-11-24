@@ -1,0 +1,53 @@
+<!doctype html><meta charset="utf-8"><title>node src/main.ts — крок 1: спільний список виборців, ключі RSA, обмін відкритими ключами</title>
+<style>
+  html,body{margin:0;background:#11111b;}
+  .window{width:978px;box-sizing:border-box;background:#1e1e2e;border-radius:10px;overflow:hidden;
+    font-family:Menlo,'SF Mono',monospace;font-size:15px;line-height:21px;color:#cdd6f4;}
+  .bar{height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#181825;}
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .bar span.t{margin-left:10px;color:#9399b2;font-size:12px;}
+  pre{margin:0;padding:26px;white-space:pre;}
+</style>
+<div class="window">
+  <div class="bar">
+    <div class="dot" style="background:#f38ba8"></div>
+    <div class="dot" style="background:#f9e2af"></div>
+    <div class="dot" style="background:#a6e3a1"></div>
+    <span class="t">node src/main.ts — крок 1: спільний список виборців, ключі RSA, обмін відкритими ключами</span>
+  </div>
+  <pre><span style="color:#89dceb">╔══════════════════════════════════════════════════════════════════════════════════════════════╗</span>
+<span style="color:#89dceb">║</span>             <span style="font-weight:700">ЛАБОРАТОРНА РОБОТА №5 — ПРОТОКОЛ Е-ГОЛОСУВАННЯ БЕЗ ВИБОРЧОЇ КОМІСІЇ</span>              <span style="color:#89dceb">║</span>
+<span style="color:#89dceb">╚══════════════════════════════════════════════════════════════════════════════════════════════╝</span>
+
+<span style="font-weight:700"><span style="color:#f9e2af">▌ КРОК 1. СПІЛЬНИЙ ВПОРЯДКОВАНИЙ СПИСОК ВИБОРЦІВ І ОБМІН ВІДКРИТИМИ КЛЮЧАМИ</span></span>
+<span style="opacity:.62">──────────────────────────────────────────────────────────────────────────────────────────────</span>
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Кожен виборець самостійно генерує пару ключів RSA (p, q — 16-бітні прості, n — 32 біти)
+<span style="opacity:.62">┌─────────┬──────────┬───────┬───────┬───────────────┬───────────────┬───────────────────────────────┐</span>
+<span style="opacity:.62">│</span> <span style="font-weight:700">Позиція</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Виборець</span> <span style="opacity:.62">│</span> <span style="font-weight:700">p</span>     <span style="opacity:.62">│</span> <span style="font-weight:700">q</span>     <span style="opacity:.62">│</span> <span style="font-weight:700">n (відкритий)</span> <span style="opacity:.62">│</span> <span style="font-weight:700">e (відкритий)</span> <span style="opacity:.62">│</span> <span style="font-weight:700">d (закритий, лише у власника)</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">├─────────┼──────────┼───────┼───────┼───────────────┼───────────────┼───────────────────────────────┤</span>
+<span style="opacity:.62">│</span> 1       <span style="opacity:.62">│</span> A        <span style="opacity:.62">│</span> 63397 <span style="opacity:.62">│</span> 64627 <span style="opacity:.62">│</span> 4097157919    <span style="opacity:.62">│</span> 65537         <span style="opacity:.62">│</span> 2176326377                    <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 2       <span style="opacity:.62">│</span> B        <span style="opacity:.62">│</span> 64919 <span style="opacity:.62">│</span> 50461 <span style="opacity:.62">│</span> 3275877659    <span style="opacity:.62">│</span> 65537         <span style="opacity:.62">│</span> 2081508833                    <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 3       <span style="opacity:.62">│</span> C        <span style="opacity:.62">│</span> 54829 <span style="opacity:.62">│</span> 56453 <span style="opacity:.62">│</span> 3095261537    <span style="opacity:.62">│</span> 65537         <span style="opacity:.62">│</span> 68196545                      <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 4       <span style="opacity:.62">│</span> D        <span style="opacity:.62">│</span> 34253 <span style="opacity:.62">│</span> 33863 <span style="opacity:.62">│</span> 1159909339    <span style="opacity:.62">│</span> 65537         <span style="opacity:.62">│</span> 181116241                     <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> 5       <span style="opacity:.62">│</span> E        <span style="opacity:.62">│</span> 35509 <span style="opacity:.62">│</span> 64283 <span style="opacity:.62">│</span> 2282625047    <span style="opacity:.62">│</span> 65537         <span style="opacity:.62">│</span> 987061481                     <span style="opacity:.62">│</span>
+<span style="opacity:.62">└─────────┴──────────┴───────┴───────┴───────────────┴───────────────┴───────────────────────────────┘</span>
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Обмін відкритими ключами: кожен складає власну копію списку
+<span style="opacity:.62">┌──────────┬───────────────────┬───────────────────┬──────────────────────────┐</span>
+<span style="opacity:.62">│</span> <span style="font-weight:700">Виборець</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Учасників у копії</span> <span style="opacity:.62">│</span> <span style="font-weight:700">Порядок</span>           <span style="opacity:.62">│</span> <span style="font-weight:700">Відбиток копії (SHA-256)</span> <span style="opacity:.62">│</span>
+<span style="opacity:.62">├──────────┼───────────────────┼───────────────────┼──────────────────────────┤</span>
+<span style="opacity:.62">│</span> A        <span style="opacity:.62">│</span> 5                 <span style="opacity:.62">│</span> A → B → C → D → E <span style="opacity:.62">│</span> 6110c378113011a8         <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> B        <span style="opacity:.62">│</span> 5                 <span style="opacity:.62">│</span> A → B → C → D → E <span style="opacity:.62">│</span> 6110c378113011a8         <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> C        <span style="opacity:.62">│</span> 5                 <span style="opacity:.62">│</span> A → B → C → D → E <span style="opacity:.62">│</span> 6110c378113011a8         <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> D        <span style="opacity:.62">│</span> 5                 <span style="opacity:.62">│</span> A → B → C → D → E <span style="opacity:.62">│</span> 6110c378113011a8         <span style="opacity:.62">│</span>
+<span style="opacity:.62">│</span> E        <span style="opacity:.62">│</span> 5                 <span style="opacity:.62">│</span> A → B → C → D → E <span style="opacity:.62">│</span> 6110c378113011a8         <span style="opacity:.62">│</span>
+<span style="opacity:.62">└──────────┴───────────────────┴───────────────────┴──────────────────────────┘</span>
+    <span style="color:#a6e3a1">✔</span> усі п’ять копій однакові: однаковий склад, порядок і відкриті ключі
+<span style="font-weight:700"><span style="color:#cba6f7"></span></span>
+  ▸ Список кандидатів і послідовність виконання протоколу
+    <span style="opacity:.62">·</span> <span style="opacity:.62">кандидат №1: Олена Петренко</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">кандидат №2: Іван Коваленко</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">шифрування (кожен раунд): E → D → C → B → A, раундів: 2</span>
+    <span style="opacity:.62">·</span> <span style="opacity:.62">розшифрування (кожен раунд): A → B → C → D → E, раундів: 2; публікує результат E</span></pre>
+</div>

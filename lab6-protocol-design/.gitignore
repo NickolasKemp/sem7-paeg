@@ -1,0 +1,4 @@
+node_modules/
+assets/*.html
+assets/*.size
+report/report.html
